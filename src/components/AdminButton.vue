@@ -26,7 +26,7 @@
 import { computed, defineComponent, reactive } from "vue";
 
 export default defineComponent({
-  name: "AdminButton",
+  name: "SltAdminButton",
   props: {
     disabled: {
       type: Boolean,

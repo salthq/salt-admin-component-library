@@ -1,7 +1,7 @@
 import AdminButton from "../components/AdminButton";
 
 export default {
-  title: "Buttons/Admin Button",
+  title: "Admin Button",
   component: AdminButton,
   argTypes: {
     onClick: {},
@@ -24,4 +24,4 @@ const Template = (args) => ({
   template: '<admin-button v-bind="args" />',
 });
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});
