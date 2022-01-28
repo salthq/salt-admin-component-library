@@ -50,6 +50,7 @@
             'text-yellow-800': variation === 'warning',
             'text-red-800': variation === 'failure',
           }"
+          v-if="$slots.default"
         >
           <slot></slot>
         </span>
@@ -85,8 +86,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+/**
+ * A wrapper for alerts
+ * @displayName AdminAlertWrapper
+ */
 export default defineComponent({
-  name: "admin-alert-wrapper",
+  name: "SltAdminAlertWrapper",
   props: {
     dismissable: {
       default: false,

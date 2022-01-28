@@ -7,15 +7,15 @@
       :disabled="disabled"
       @click="onClick"
     >
+      <div class="mr-1" v-if="hasIcon">
+        <slot name="icon"></slot>
+      </div>
+
       <div v-if="loading">
         <slot name="loadingPlaceholder">Loading...</slot>
       </div>
 
       <div class="flex items-center" v-else>
-        <span class="mr-1" v-if="!!$slots.icon">
-          <slot name="icon"></slot>
-        </span>
-
         {{ label }}
       </div>
     </button>
@@ -23,8 +23,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 
+/**
+ * A generic admin button
+ * @displayName AdminButton
+ */
 export default defineComponent({
   name: "SltAdminButton",
   props: {
@@ -41,16 +45,12 @@ export default defineComponent({
     label: {
       type: String,
       required: false,
-      default: (): string => {
-        return "Save";
-      },
+      default: "Save",
     },
     type: {
       type: String,
       required: false,
-      default: (): string => {
-        return "button";
-      },
+      default: "button",
       validator: (value: string): boolean => {
         return ["submit", "button", "reset"].indexOf(value) !== -1;
       },
@@ -66,9 +66,17 @@ export default defineComponent({
       required: false,
     },
   },
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     props = reactive(props);
+
+    const hasIcon = ref(false);
+
+    if (slots.icon && slots.icon().length) {
+      hasIcon.value = true;
+    }
+
     return {
+      hasIcon,
       variationClasses: computed(() => ({
         "admin-button-primary text-white border-transparent bg-primary-700 hover:opacity-75":
           props.variation == "primary" && !props.disabled,
