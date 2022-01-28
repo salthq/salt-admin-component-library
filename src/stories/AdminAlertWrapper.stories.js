@@ -1,4 +1,4 @@
-import AdminAlertWrapper from "../components/AdminAlertWrapper";
+import AdminAlertWrapper from "../components/AdminAlertWrapper/AdminAlertWrapper.vue";
 
 export default {
   title: "Admin Alert Wrapper",

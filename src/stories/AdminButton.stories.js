@@ -1,4 +1,4 @@
-import AdminButton from "../components/AdminButton";
+import AdminButton from "../components/AdminButton/AdminButton.vue";
 
 export default {
   title: "Admin Button",
