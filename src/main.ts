@@ -1,7 +1,19 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import store from "./store";
+import { App } from "vue";
 
-import "./styles/main.css";
+import * as components from "./components";
 
-createApp(App).use(store).mount("#app");
+import { setVueInstance } from "./utils/config";
+import { registerPlugin } from "./utils/plugins";
+
+const SltAdminComponentLibrary = {
+  install(app: App): void {
+    setVueInstance(app);
+    // Components
+    for (const componentKey in components) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      registerPlugin(app, (components as any)[componentKey]);
+    }
+  },
+};
+
+export default SltAdminComponentLibrary;
