@@ -11,7 +11,9 @@ jobs:
     name: "Node.js v${{ matrix.node }}"
     runs-on: ubuntu-latest
     strategy:
-      matrix: node:14
+      matrix:
+        node:
+          - 14
     steps:
       - uses: actions/setup-node@v2
         with:
