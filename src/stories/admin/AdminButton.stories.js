@@ -1,12 +1,16 @@
-import AdminButton from "../../components/AdminButton/AdminButton.vue";
+import SltAdminButton from "../../components/AdminButton/AdminButton.vue";
 
 export default {
   title: "Admin/Button",
-  component: AdminButton,
+  component: SltAdminButton,
   argTypes: {
     onClick: {},
     disabled: {
       defaultValue: false,
+    },
+    icon: {
+      control: { type: "select" },
+      options: ["", "icon-archive", "icon-copy"],
     },
     loading: {
       defaultValue: false,
@@ -28,15 +32,26 @@ export default {
   },
 };
 
-export const Button = (args) => ({
-  components: { AdminButton },
+const Template = (args) => ({
+  components: { SltAdminButton },
   setup() {
-    return { args };
+    return {
+      args,
+    };
   },
-  template: '<admin-button v-bind="args" />',
+  template: `<slt-admin-button v-bind="args" />`,
 });
 
-Button.args = {
+export const Default = Template.bind({});
+Default.args = {
   type: "button",
   variation: "primary",
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  type: "button",
+  variation: "secondary",
+  icon: "icon-copy",
+  label: "Copy",
 };

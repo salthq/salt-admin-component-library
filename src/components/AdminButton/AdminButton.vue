@@ -2,14 +2,12 @@
   <span class="inline-block rounded-md">
     <button
       :type="type"
-      class="inline-flex justify-center py-2 px-4 border text-sm leading-5 font-medium rounded-md shadow-sm transition duration-150 ease-in-out"
+      class="inline-flex justify-center items-center py-2 px-4 border text-sm leading-5 font-medium rounded-md shadow-sm transition duration-150 ease-in-out"
       :class="variationClasses"
       :disabled="disabled"
       @click="onClick"
     >
-      <div class="mr-1" v-if="hasIcon">
-        <slot name="icon"></slot>
-      </div>
+      <component class="mr-2" v-if="icon" :is="icon" :size="24" />
 
       <div v-if="loading">
         <slot name="loadingPlaceholder">Loading...</slot>
@@ -25,17 +23,31 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from "vue";
 
+import IconArchive from "../Icons/IconArchive/IconArchive.vue";
+import IconCopy from "../Icons/IconCopy/IconCopy.vue";
+
 /**
  * A generic admin button
  * @displayName AdminButton
  */
 export default defineComponent({
   name: "SltAdminButton",
+  components: {
+    IconArchive,
+    IconCopy,
+  },
   props: {
     disabled: {
       type: Boolean,
       required: false,
       default: false,
+    },
+    icon: {
+      type: String,
+      required: false,
+      validator: (value: string): boolean => {
+        return ["icon-archive", "icon-copy"].indexOf(value) !== -1;
+      },
     },
     loading: {
       type: Boolean,

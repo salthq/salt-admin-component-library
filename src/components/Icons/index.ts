@@ -1,3 +1,4 @@
-import IconArchive from "./IconArchive/IconArchive";
+import IconArchive from "./IconArchive";
+import IconCopy from "./IconCopy";
 
-export { IconArchive };
+export { IconArchive, IconCopy };

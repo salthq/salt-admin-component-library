@@ -1,17 +1,19 @@
-<!-- Viewport: 0 0 32 32 -->
+<!-- viewBox="0 0 32 32" -->
+
 <template>
   <icon-wrapper v-bind="$props">
     <g
       ><path
-        d="M20.5,11h-9a3.5,3.5,0,0,0,0,7h9a3.5,3.5,0,0,0,0-7Zm0,5h-9a1.5,1.5,0,0,1,0-3h9a1.5,1.5,0,0,1,0,3Zm0-5h-9a3.5,3.5,0,0,0,0,7h9a3.5,3.5,0,0,0,0-7Zm0,5h-9a1.5,1.5,0,0,1,0-3h9a1.5,1.5,0,0,1,0,3ZM30,1H2A1,1,0,0,0,1,2V7A1,1,0,0,0,2,8H3V30a1,1,0,0,0,1,1H28a1,1,0,0,0,1-1V8h1a1,1,0,0,0,1-1V2A1,1,0,0,0,30,1ZM27,29H5V8H27ZM29,6H3V3H29ZM11.5,18h9a3.5,3.5,0,0,0,0-7h-9a3.5,3.5,0,0,0,0,7Zm0-5h9a1.5,1.5,0,0,1,0,3h-9a1.5,1.5,0,0,1,0-3Z"
+        d="M26,31H10a2,2,0,0,1-2-2V7a2,2,0,0,1,2-2H26a2,2,0,0,1,2,2V29A2,2,0,0,1,26,31ZM10,7V29H26V7ZM6,26V4A1,1,0,0,1,7,3H23a1,1,0,0,0,0-2H7A3,3,0,0,0,4,4V26a1,1,0,0,0,2,0Z"
     /></g>
   </icon-wrapper>
 </template>
 
 <script lang="ts">
 import IconWrapper from "../IconWrapper.vue";
+
 export default {
-  name: "SltIconArchive",
+  name: "SltIconCopy",
   components: {
     IconWrapper,
   },
@@ -23,7 +25,7 @@ export default {
     size: {
       type: Number,
       required: false,
-      default: 28,
+      default: 16,
     },
     strokeWidth: {
       type: Number,
