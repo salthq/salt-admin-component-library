@@ -55,11 +55,6 @@ export default {
       required: true,
       type: Array as PropType<Array<Breadcrumb>>,
     },
-    useInertiaLinks: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
   },
 };
 </script>
