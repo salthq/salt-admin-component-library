@@ -1,7 +1,7 @@
-import AdminAlertWrapper from "../components/AdminAlertWrapper/AdminAlertWrapper.vue";
+import AdminAlertWrapper from "../../components/AdminAlertWrapper/AdminAlertWrapper.vue";
 
 export default {
-  title: "Admin Alert Wrapper",
+  title: "Admin/Alert",
   components: AdminAlertWrapper,
   argTypes: {
     dismissable: {
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = (args) => ({
+export const Alert = (args) => ({
   components: { AdminAlertWrapper },
   setup() {
     return { args };
@@ -22,5 +22,3 @@ const Template = (args) => ({
   template:
     '<admin-alert-wrapper v-bind="args"> This is an alert </admin-alert-wrapper>',
 });
-
-export const Default = Template.bind({});

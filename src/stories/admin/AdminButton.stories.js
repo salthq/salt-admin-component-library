@@ -1,7 +1,7 @@
-import AdminButton from "../components/AdminButton/AdminButton.vue";
+import AdminButton from "../../components/AdminButton/AdminButton.vue";
 
 export default {
-  title: "Admin Button",
+  title: "Admin/Button",
   component: AdminButton,
   argTypes: {
     onClick: {},
@@ -16,12 +16,10 @@ export default {
   },
 };
 
-const Template = (args) => ({
+export const Button = (args) => ({
   components: { AdminButton },
   setup() {
     return { args };
   },
   template: '<admin-button v-bind="args" />',
 });
-
-export const Default = Template.bind({});
