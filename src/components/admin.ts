@@ -3,6 +3,7 @@ import AdminBadge from "./AdminBadge";
 import AdminBreadcrumbs from "./AdminBreadcrumbs";
 import AdminButton from "./AdminButton";
 import AdminCardWrapper from "./AdminCardWrapper";
+import AdminCopyBadge from "./AdminCopyBadge";
 
 export {
   AdminAlertWrapper,
@@ -10,4 +11,5 @@ export {
   AdminBreadcrumbs,
   AdminButton,
   AdminCardWrapper,
+  AdminCopyBadge,
 };
