@@ -84,12 +84,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
-/**
- * A wrapper for alerts
- * @displayName AdminAlertWrapper
- */
+type variationType = "success" | "warning" | "failure";
+
 export default defineComponent({
   name: "SltAdminAlertWrapper",
   props: {
@@ -99,10 +97,8 @@ export default defineComponent({
       required: false,
     },
     variation: {
+      type: String as PropType<variationType>,
       default: "success",
-      validator: (value: string): boolean => {
-        return ["success", "warning", "failure"].indexOf(value) !== -1;
-      },
       required: false,
     },
   },

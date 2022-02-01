@@ -14,18 +14,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, PropType, reactive } from "vue";
+
+type variationType = "default" | "success" | "warning" | "failure";
 
 export default defineComponent({
   name: "SltAdminBadge",
   props: {
     variation: {
+      type: String as PropType<variationType>,
       default: "default",
-      validator: (value: string): boolean => {
-        return (
-          ["default", "success", "warning", "failure"].indexOf(value) !== -1
-        );
-      },
       required: false,
     },
   },

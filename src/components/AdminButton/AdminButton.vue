@@ -21,15 +21,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, PropType, reactive, ref } from "vue";
 
 import IconArchive from "../Icons/IconArchive/IconArchive.vue";
 import IconCopy from "../Icons/IconCopy/IconCopy.vue";
 
-/**
- * A generic admin button
- * @displayName AdminButton
- */
+type iconType = "icon-archive" | "icon-copy";
+type buttonType = "submit" | "button" | "reset";
+type variationType = "primary" | "secondary" | "danger" | "white";
+
 export default defineComponent({
   name: "SltAdminButton",
   components: {
@@ -43,11 +43,8 @@ export default defineComponent({
       default: false,
     },
     icon: {
-      type: String,
+      type: String as PropType<iconType>,
       required: false,
-      validator: (value: string): boolean => {
-        return ["icon-archive", "icon-copy"].indexOf(value) !== -1;
-      },
     },
     loading: {
       type: Boolean,
@@ -60,21 +57,13 @@ export default defineComponent({
       default: "Save",
     },
     type: {
-      type: String,
+      type: String as PropType<buttonType>,
       required: false,
       default: "button",
-      validator: (value: string): boolean => {
-        return ["submit", "button", "reset"].indexOf(value) !== -1;
-      },
     },
     variation: {
       default: "primary",
-      type: String,
-      validator: (value: string): boolean => {
-        return (
-          ["danger", "primary", "secondary", "white"].indexOf(value) !== -1
-        );
-      },
+      type: String as PropType<variationType>,
       required: false,
     },
   },
@@ -91,13 +80,13 @@ export default defineComponent({
       hasIcon,
       variationClasses: computed(() => ({
         "admin-button-primary text-white border-transparent bg-primary-700 hover:opacity-75":
-          props.variation == "primary" && !props.disabled,
+          props.variation === "primary" && !props.disabled,
         "admin-button-secondary text-primary-700 border-primary-700 bg-white hover:opacity-75":
-          props.variation == "secondary" && !props.disabled,
+          props.variation === "secondary" && !props.disabled,
         "admin-button-white text-gray-700 bg-white hover:bg-gray-100":
-          props.variation == "white" && !props.disabled,
+          props.variation === "white" && !props.disabled,
         "admin-button-danger text-white border-transparent bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring active:bg-red-700":
-          props.variation == "danger" && !props.disabled,
+          props.variation === "danger" && !props.disabled,
         "admin-button-disabled bg-gray-200 text-white cursor-none border-transparent":
           props.disabled,
       })),
