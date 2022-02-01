@@ -1,4 +1,4 @@
-import SltIconCopy from "../../components/Icons/IconCopy/IconCopy.vue";
+import SltIconCopy from "../../components/IconCopy/IconCopy.vue";
 import IconArgTypes from "./IconArgTypes";
 
 export default {

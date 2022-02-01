@@ -1,7 +1,7 @@
 import { App } from "vue";
 
-import * as components from "./components";
-import * as icons from "./components/Icons";
+import * as components from "./components/admin";
+import * as icons from "./components/icons";
 
 import { setVueInstance } from "./utils/config";
 import { registerPlugin } from "./utils/plugins";

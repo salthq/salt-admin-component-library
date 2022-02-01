@@ -23,8 +23,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, reactive, ref } from "vue";
 
-import IconArchive from "../Icons/IconArchive/IconArchive.vue";
-import IconCopy from "../Icons/IconCopy/IconCopy.vue";
+import IconArchive from "../IconArchive/IconArchive.vue";
+import IconCopy from "../IconCopy/IconCopy.vue";
 
 type iconType = "icon-archive" | "icon-copy";
 type buttonType = "submit" | "button" | "reset";
