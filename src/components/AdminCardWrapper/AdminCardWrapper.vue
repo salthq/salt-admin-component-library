@@ -1,13 +1,20 @@
 <template>
   <div class="bg-white rounded-lg shadow">
     <div
-      v-if="!!$slots.header"
-      class="mx-auto pt-12 pb-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200"
+      v-if="!!$slots.title"
+      class="mx-auto border-b border-gray-200 py-6 px-4 sm:px-6 lg:px-8"
     >
-      <slot name="header"></slot>
+      <div class="w-full flex justify-between items-center">
+        <div>
+          <slot name="title"></slot>
+        </div>
+        <div class="space-x-2" v-if="!!$slots.actions">
+          <slot name="actions"></slot>
+        </div>
+      </div>
     </div>
 
-    <div :class="classes" v-if="!!$slots.default">
+    <div :class="paddingClasses" v-if="!!$slots.default">
       <slot></slot>
     </div>
   </div>
@@ -25,12 +32,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const classes = computed(() => ({
-      "p-6": props.hasPadding,
+    const paddingClasses = computed(() => ({
+      "py-6 px-4 sm:px-6 lg:px-8": props.hasPadding,
     }));
 
     return {
-      classes,
+      paddingClasses,
     };
   },
 });

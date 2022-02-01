@@ -1,6 +1,6 @@
 import { App } from "vue";
 
-import * as components from "./components/admin";
+import * as adminComponents from "./components/admin";
 import * as icons from "./components/icons";
 
 import { setVueInstance } from "./utils/config";
@@ -9,10 +9,10 @@ import { registerPlugin } from "./utils/plugins";
 const SltAdminComponentLibrary = {
   install(app: App): void {
     setVueInstance(app);
-    // Components
-    for (const componentKey in components) {
+    // Admin Components
+    for (const componentKey in adminComponents) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      registerPlugin(app, (components as any)[componentKey]);
+      registerPlugin(app, (adminComponents as any)[componentKey]);
     }
 
     // Icons
