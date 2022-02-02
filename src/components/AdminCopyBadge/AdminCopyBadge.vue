@@ -2,7 +2,7 @@
   <button
     type="button"
     class="inline-flex items-center px-2 py-1 cursor-pointer hover:opacity-75 my-1 rounded-md text-sm leading-5 bg-gray-100 text-primary-700"
-    @click="emitCopy"
+    @click="emitCopy($slots.text)"
     title="Copy"
   >
     <span v-if="$slots.label" class="font-bold">
@@ -25,10 +25,14 @@ export default defineComponent({
   components: {
     IconCopy,
   },
-  emits: ["copy"],
+  emits: {
+    copyText(payload: string) {
+      return payload.length > 0;
+    },
+  },
   methods: {
-    emitCopy() {
-      this.$emit("copy", this.$slots.text);
+    emitCopy(text: string) {
+      this.$emit("copyText", text);
     },
   },
 });
