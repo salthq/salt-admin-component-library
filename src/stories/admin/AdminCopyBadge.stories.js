@@ -1,7 +1,7 @@
 import SltAdminCopyBadge from "../../components/AdminCopyBadge/AdminCopyBadge.vue";
 
 export default {
-  title: "Admin/Copy Badge",
+  title: "Admin/Badges/Copy Badge",
   component: SltAdminCopyBadge,
   argTypes: {
     onClick: {},

@@ -1,7 +1,7 @@
 import SltAdminBadge from "../../components/AdminBadge/AdminBadge.vue";
 
 export default {
-  title: "Admin/Badge",
+  title: "Admin/Badges/Badge",
   component: SltAdminBadge,
   argTypes: {
     label: {

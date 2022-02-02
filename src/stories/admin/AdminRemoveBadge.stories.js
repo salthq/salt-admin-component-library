@@ -1,7 +1,7 @@
 import SltAdminRemoveBadge from "../../components/AdminRemoveBadge/AdminRemoveBadge.vue";
 
 export default {
-  title: "Admin/Remove Badge",
+  title: "Admin/Badges/Remove Badge",
   component: SltAdminRemoveBadge,
   argTypes: {
     onClick: {},
