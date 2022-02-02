@@ -24,9 +24,23 @@ import IconImage from "./IconImage";
 import IconImport from "./IconImport";
 import IconIncorrect from "./IconIncorrect";
 import IconInfo from "./IconInfo";
+import IconLink from "./IconLink";
+import IconList from "./IconList";
+import IconMenu from "./IconMenu";
+import IconNotification from "./IconNotification";
+import IconPlus from "./IconPlus";
+import IconPlay from "./IconPlay";
+import IconRefresh from "./IconRefresh";
 
 
 export { 
+    IconRefresh,
+    IconPlay,
+    IconPlus,
+    IconNotification,
+    IconMenu,
+    IconList,
+    IconLink,
     IconArchive, 
     IconCopy, 
     IconRemove, 
