@@ -5,6 +5,7 @@ import AdminButton from "./AdminButton";
 import AdminCardWrapper from "./AdminCardWrapper";
 import AdminCopyBadge from "./AdminCopyBadge";
 import AdminLinkButton from "./AdminLinkButton";
+import AdminRemoveBadge from "./AdminRemoveBadge";
 
 export {
   AdminAlertWrapper,
@@ -14,4 +15,5 @@ export {
   AdminCardWrapper,
   AdminCopyBadge,
   AdminLinkButton,
+  AdminRemoveBadge,
 };
