@@ -49,17 +49,7 @@ Default.args = {
   type: "text",
 };
 
-export const Required = Template.bind({});
-
-Required.args = {
-  inputId: "example_input",
-  required: true,
-  label: "Name",
-  type: "text",
-};
-
 export const ReadOnly = Template.bind({});
-
 ReadOnly.args = {
   inputId: "example_input",
   readonly: true,
@@ -67,8 +57,15 @@ ReadOnly.args = {
   type: "text",
 };
 
-export const WithInfo = Template.bind({});
+export const Required = Template.bind({});
+Required.args = {
+  inputId: "example_input",
+  required: true,
+  label: "Name",
+  type: "text",
+};
 
+export const WithInfo = Template.bind({});
 WithInfo.args = {
   inputId: "example_input",
   info: "Enter your first and last names",
