@@ -19,12 +19,7 @@ const breadcrumbs = [
 ];
 
 const wrapper = shallowMount(AdminBreadcrumbs, {
-  props: { breadcrumbs, useInertiaLinks: false },
-  global: {
-    stubs: {
-      AppInertiaLink: true,
-    },
-  },
+  props: { breadcrumbs },
 });
 
 describe("AdminBreadcrumbs.vue", () => {
