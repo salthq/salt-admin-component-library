@@ -4,6 +4,7 @@ import AdminBreadcrumbs from "./AdminBreadcrumbs";
 import AdminButton from "./AdminButton";
 import AdminCardWrapper from "./AdminCardWrapper";
 import AdminCopyBadge from "./AdminCopyBadge";
+import AdminLinkButton from "./AdminLinkButton";
 
 export {
   AdminAlertWrapper,
@@ -12,4 +13,5 @@ export {
   AdminButton,
   AdminCardWrapper,
   AdminCopyBadge,
+  AdminLinkButton,
 };
