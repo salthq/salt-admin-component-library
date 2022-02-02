@@ -25,4 +25,32 @@ import IconImport from "./IconImport";
 import IconIncorrect from "./IconIncorrect";
 import IconInfo from "./IconInfo";
 
-export { IconArchive, IconCopy, IconRemove, IconInfo, IconIncorrect, IconImport, IconImage, IconFolder, IconFilter, IconFile, IconEye, IconExport, IconEdit, IconDrag, IconDownloadQueue, IconDownload, IconDislike, IconDashboard, IconDanger, IconCross, IconClose, IconAttachment, IconArrowUp, IconArrowPrev, IconArrowNext, IconArrowDown };
+
+export { 
+    IconArchive, 
+    IconCopy, 
+    IconRemove, 
+    IconInfo, 
+    IconIncorrect, 
+    IconImport, 
+    IconImage, 
+    IconFolder, 
+    IconFilter, 
+    IconFile, 
+    IconEye, 
+    IconExport, 
+    IconEdit, 
+    IconDrag, 
+    IconDownloadQueue, 
+    IconDownload, 
+    IconDislike, 
+    IconDashboard, 
+    IconDanger, 
+    IconCross, 
+    IconClose, 
+    IconAttachment, 
+    IconArrowUp, 
+    IconArrowPrev, 
+    IconArrowNext, 
+    IconArrowDown 
+};
