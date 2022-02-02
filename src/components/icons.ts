@@ -14,4 +14,20 @@ import IconDislike from "./IconDislike";
 import IconDownload from "./IconDownload";
 import IconDownloadQueue from "./IconDownloadQueue";
 
-export { IconArchive, IconCopy, IconRemove, IconDownloadQueue, IconDownload, IconDislike, IconDashboard, IconDanger, IconCross, IconClose, IconAttachment, IconArrowUp, IconArrowPrev, IconArrowNext, IconArrowDown };
+export {
+  IconArchive,
+  IconCopy,
+  IconRemove,
+  IconDownloadQueue,
+  IconDownload,
+  IconDislike,
+  IconDashboard,
+  IconDanger,
+  IconCross,
+  IconClose,
+  IconAttachment,
+  IconArrowUp,
+  IconArrowPrev,
+  IconArrowNext,
+  IconArrowDown,
+};
