@@ -1,7 +1,7 @@
 import SltAdminDropdownList from "../../components/AdminDropdownList/AdminDropdownList.vue";
 
 export default {
-  title: "Admin/Dropdowns/Dropdown List",
+  title: "Admin/Dropdowns/List",
   component: SltAdminDropdownList,
 };
 
@@ -45,4 +45,5 @@ Default.args = {
       label: "Folder",
     },
   ],
+  label: ["label", "value"],
 };
