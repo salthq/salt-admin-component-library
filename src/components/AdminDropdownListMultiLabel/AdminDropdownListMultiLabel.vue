@@ -125,6 +125,7 @@ import AdminButton from "../AdminButton/AdminButton.vue";
 import IconRemove from "../../components/IconRemove/IconRemove.vue";
 
 export default defineComponent({
+  name: "SltAdminDropdownListMultiLabel",
   components: {
     AdminButton,
     IconRemove,
@@ -275,7 +276,7 @@ export default defineComponent({
 
       document.addEventListener("click", (event) => {
         if (event.target instanceof Element) {
-          const isClickInside = thisElement?.contains(event.target);
+          const isClickInside = thisElement.contains(event.target);
           if (!isClickInside && state.inputActive) {
             state.inputActive = false;
             if (Object.keys(state.selectedItem).length === 0) {

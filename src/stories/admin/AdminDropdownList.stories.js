@@ -45,5 +45,4 @@ Default.args = {
       label: "Folder",
     },
   ],
-  label: ["label", "value"],
 };

@@ -82,21 +82,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  PropType,
-  reactive,
-  toRefs,
-} from "vue";
+<script>
+import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
 
 import searchWithFuse from "../../composables/dropdown/searchWithFuse";
 
 import IconRemove from "../../components/IconRemove/IconRemove.vue";
 
 export default defineComponent({
+  name: "SltAdminDropdownList",
   components: {
     IconRemove,
   },
@@ -114,7 +108,7 @@ export default defineComponent({
     },
     // The list of items displayed when the dropdown is activated
     itemList: {
-      type: Array as PropType<Array<string>>,
+      type: Array,
       required: true,
     },
     // The text shown when the dropdown input is inactive and nothing has been selected
@@ -156,7 +150,7 @@ export default defineComponent({
       return state.inputActive;
     });
 
-    const itemVisible = (item: any) => {
+    const itemVisible = (item) => {
       if (!state.inputValue) return true;
 
       let currentName = item[props.itemLabel].toLowerCase();
@@ -170,7 +164,7 @@ export default defineComponent({
       emit("on-item-reset", "");
     };
 
-    const selectItem = (item: Record<string, unknown>) => {
+    const selectItem = (item) => {
       state.selectedItem = item;
       state.inputActive = false;
       state.inputValue = "";
@@ -183,7 +177,7 @@ export default defineComponent({
 
       document.addEventListener("click", (event) => {
         if (event.target instanceof Element) {
-          const isClickInside = thisElement?.contains(event.target);
+          const isClickInside = thisElement.contains(event.target);
           if (!isClickInside && state.inputActive) {
             state.inputActive = false;
             if (Object.keys(state.selectedItem).length === 0) {
