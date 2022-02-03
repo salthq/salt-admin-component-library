@@ -31,9 +31,28 @@ import IconNotification from "./IconNotification";
 import IconPlus from "./IconPlus";
 import IconPlay from "./IconPlay";
 import IconRefresh from "./IconRefresh";
-
+import IconSave from "./IconSave";
+import IconSearch from "./IconSearch";
+import IconSortDown from "./IconSortDown";
+import IconSortUp from "./IconSortUp";
+import IconTag from "./IconTag";
+import IconTick from "./IconTick";
+import IconTile from "./IconTile";
+import IconTrash from "./IconTrash";
+import IconUnarchive from "./IconUnarchive";
+import IconUser from "./IconUser";
 
 export { 
+    IconUser,
+    IconUnarchive,
+    IconTrash,
+    IconTile,
+    IconTick,
+    IconTag,
+    IconSortUp,
+    IconSortDown,
+    IconSearch,
+    IconSave,
     IconRefresh,
     IconPlay,
     IconPlus,
