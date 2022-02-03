@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, toRefs } from "vue";
+import { defineComponent, PropType, reactive, ref, toRefs } from "vue";
 
 import AdminFormItemWrapper from "../AdminFormItemWrapper.vue";
 // import IconLoading from "../IconLoading/IconLoading.vue";
@@ -77,7 +77,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    props = reactive(props);
+    const test = ref(5);
 
     const state = reactive({
       inputValue: props.value ? props.value : "",

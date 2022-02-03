@@ -4,6 +4,7 @@ import AdminBreadcrumbs from "./AdminBreadcrumbs";
 import AdminButton from "./AdminButton";
 import AdminCardWrapper from "./AdminCardWrapper";
 import AdminCopyBadge from "./AdminCopyBadge";
+import AdminDropdownList from "./AdminDropdownList";
 import AdminFormInput from "./AdminFormInput";
 import AdminFormTextArea from "./AdminFormTextArea";
 import AdminFormToggle from "./AdminFormToggle";
@@ -17,6 +18,7 @@ export {
   AdminButton,
   AdminCardWrapper,
   AdminCopyBadge,
+  AdminDropdownList,
   AdminFormInput,
   AdminFormTextArea,
   AdminFormToggle,
