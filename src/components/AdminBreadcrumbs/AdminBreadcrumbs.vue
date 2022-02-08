@@ -6,19 +6,13 @@
         v-for="(breadcrumb, index) in breadcrumbs"
         :key="index"
       >
-        <slot
-          name="link"
-          :breadcrumb="breadcrumb"
-          :breadcrumbs="breadcrumbs"
-          :index="index"
+        <app-inertia-link
+          class="hover:underline"
+          :class="{ 'text-primary-700': index === breadcrumbs.length - 1 }"
+          :href="breadcrumb.url"
         >
-          <a
-            class="hover:underline"
-            :class="{ 'text-primary-700': index === breadcrumbs.length - 1 }"
-            :href="breadcrumb.url"
-            >{{ breadcrumb.title }}</a
-          >
-        </slot>
+          {{ breadcrumb.title }}
+        </app-inertia-link>
 
         <svg
           class="h-5 w-auto text-gray-400"
@@ -40,16 +34,18 @@
 <script lang="ts">
 import { PropType } from "vue";
 
+import AppInertiaLink from "../AppInertiaLink.vue";
+
 interface Breadcrumb {
   url: string;
   title: string;
 }
 
-/**
- * Test!
- */
 export default {
   name: "SltAdminBreadcrumbs",
+  components: {
+    AppInertiaLink,
+  },
   props: {
     breadcrumbs: {
       required: true,

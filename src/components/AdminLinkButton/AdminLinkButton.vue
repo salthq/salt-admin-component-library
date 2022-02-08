@@ -1,20 +1,22 @@
 <template>
   <span class="self-start rounded-md shadow-sm">
-    <slot name="link" :classes="classes" :link="link" :text="text">
-      <a :class="classes" :href="link">
-        {{ text }}
-      </a>
-    </slot>
+    <app-inertia-link :class="classes" :href="link">
+      {{ text }}
+    </app-inertia-link>
   </span>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
+import AppInertiaLink from "../AppInertiaLink.vue";
 
 type variationType = "primary" | "danger" | "secondary" | "white";
 
 export default defineComponent({
   name: "SltAdminLink",
+  components: {
+    AppInertiaLink,
+  },
   props: {
     text: {
       type: String,

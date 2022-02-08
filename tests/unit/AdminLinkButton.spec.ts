@@ -64,29 +64,4 @@ describe("AdminLinkButton.vue", () => {
 
     assert.isTrue(link.classes("admin-link-danger"));
   });
-
-  /**
-   * Skipping this because it does not work - it doesn't render
-   * the scoped slot at all, regardless of what the docs say:
-   * https://next.vue-test-utils.vuejs.org/guide/advanced/slots.html#scoped-slots
-   *
-   */
-  //   it("allows you to add a custom link using the link slot", () => {
-  //     const wrapper = mount(AdminLinkButton, {
-  //       props: { text },
-  //       slots: {
-  //         link: () => `<template v-slot:link="slotProps">
-  //               <a
-  //                   id="custom-link"
-  //                   :href="slotProps.link"
-  //                   :class="slotProps.classes"
-  //               >
-  //                   {{ slotProps.text }}
-  //               </a>
-  //           </template>`,
-  //       },
-  //     });
-
-  //     assert.exists(wrapper.html(), text);
-  //   });
 });
