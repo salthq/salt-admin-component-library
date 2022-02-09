@@ -1,0 +1,216 @@
+<template>
+  <div class="flex flex-col">
+    <slot name="customActions"></slot>
+
+    <div
+      class="-my-2 pt-2 pb-24 lg:pb-8 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+    >
+      <div
+        class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+      >
+        <table class="min-w-full">
+          <slot name="header">
+            <thead>
+              <tr>
+                <admin-table-header
+                  v-if="hasSelect"
+                  class="hover:bg-gray-50 cursor-pointer w-6"
+                  @click="toggleSelectAll"
+                >
+                  <div class="flex items-center justify-center">
+                    <input
+                      type="checkbox"
+                      class="border form-checkbox cursor-pointer h-4 w-4 text-primary-700 transition duration-150 ease-in-out"
+                      :checked="allRowsSelected"
+                    />
+                  </div>
+                </admin-table-header>
+                <admin-table-header
+                  v-for="column in columns"
+                  :key="column.label"
+                  @click="column.sort ? searchOrSort(null, column.sort) : ''"
+                  :label="column.label"
+                  :sort="column.sort"
+                />
+              </tr>
+            </thead>
+          </slot>
+          <tbody v-if="!emptyTable && !loading">
+            <slot name="rows"> </slot>
+          </tbody>
+          <tbody class="p-6 flex justify-center" v-if="loading">
+            <span>
+              <icon-loading />
+            </span>
+          </tbody>
+        </table>
+        <div v-if="emptyTable">
+          <slot name="empty"> </slot>
+        </div>
+        <admin-table-pagination
+          v-if="hasPagination && table.total"
+          :pagination="table"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, onMounted, PropType, reactive } from "vue";
+
+import state from "../../state/adminTableState";
+
+import { Columns, TableData, TablePagination } from "../../types/adminTable";
+
+import AdminTableHeader from "../AdminTableHeader/AdminTableHeader.vue";
+import AdminTablePagination from "../AdminTablePagination/AdminTablePagination.vue";
+import IconLoading from "../../components/IconLoading/IconLoading.vue";
+
+export default defineComponent({
+  name: "SltAdminTable",
+  components: {
+    AdminTableHeader,
+    AdminTablePagination,
+    IconLoading,
+  },
+  props: {
+    tableData: {
+      type: Object as PropType<TableData>,
+      default: null,
+    },
+    tablePagination: {
+      type: Object as PropType<TablePagination>,
+      required: false,
+    },
+    hasFilters: {
+      type: Boolean,
+      default: false,
+    },
+    hasPagination: {
+      type: Boolean,
+      default: false,
+    },
+    hasSearch: {
+      type: Boolean,
+      default: false,
+    },
+    hasSelect: {
+      type: Boolean,
+      default: false,
+    },
+    hasExport: {
+      type: Boolean,
+      default: false,
+    },
+    columns: {
+      type: Array as PropType<Array<Columns>>,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props, { emit }) {
+    const data = reactive({
+      currentSort: "id",
+      currentSortDir: "asc",
+    });
+
+    const allRowIds = computed((): number[] => {
+      return props.tableData.map((item) => {
+        if (item.user_id) return item.user_id;
+
+        return item.id;
+      }) as number[];
+    });
+
+    const emptyTable = computed(() => {
+      return !props.tableData?.length;
+    });
+
+    const searchOrSort = (query: string | null, sort: string | null) => {
+      if (query === null) {
+        query = state.activeQuery;
+      }
+
+      if (sort && sort === data.currentSort) {
+        data.currentSortDir = data.currentSortDir === "asc" ? "desc" : "asc";
+        state.activeSortState = data.currentSortDir;
+      }
+
+      if (sort) {
+        data.currentSort = sort;
+      } else {
+        data.currentSort = state.activeSortColumn;
+        data.currentSortDir = state.activeSortState;
+      }
+
+      state.activeSortColumn = data.currentSort;
+      state.activeQuery = query;
+
+      const params = new URLSearchParams(location.search);
+
+      let form = {
+        query: query,
+        column: data.currentSort,
+        direction: data.currentSortDir,
+      } as {
+        query: string;
+        column: string;
+        direction: string;
+        [key: string]: string | number;
+      };
+
+      if (props.tablePagination) {
+        form.perPage = props.tablePagination.per_page;
+      }
+
+      for (const [key, value] of params) {
+        if (
+          key !== "query" &&
+          key !== "column" &&
+          key !== "direction" &&
+          key !== "perPage"
+        ) {
+          form.key = value;
+        }
+      }
+
+      emit("search", form);
+    };
+
+    const toggleSelectAll = () => {
+      state.allUsersSelected = !state.allUsersSelected;
+      state.allRowsSelected = !state.allRowsSelected;
+
+      if (state.allRowsSelected) {
+        state.selectedRows = allRowIds.value;
+      } else {
+        state.selectedRows = [];
+      }
+    };
+
+    onMounted(() => {
+      const params = new URLSearchParams(location.search);
+
+      if (params.get("column") && params.get("direction")) {
+        state.activeSortColumn = params.get("column") ?? "id";
+        state.activeSortState = params.get("direction") ?? "asc";
+      } else {
+        state.activeSortColumn = data.currentSort;
+        state.activeSortState = data.currentSortDir;
+      }
+
+      state.allRowIDs = allRowIds.value;
+      state.selectedRows = [];
+    });
+
+    return {
+      emptyTable,
+      searchOrSort,
+      toggleSelectAll,
+    };
+  },
+});
+</script>

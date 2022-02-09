@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 
 type SelectedUsersType = Array<number>;
-type AllRowsIdsType = Array<number>;
+type AllRowIdsType = Array<number>;
 type SelectedRowsType = Array<number>;
 
 export default reactive({
@@ -12,7 +12,7 @@ export default reactive({
   allUsersSelected: false,
   selectedUsers: [] as SelectedUsersType,
   allRowsSelected: false,
-  allRowsIDs: [] as AllRowsIdsType,
+  allRowIDs: [] as AllRowIdsType,
   selectedRows: [] as SelectedRowsType,
   tablePerPageOption: 10,
 });

@@ -163,26 +163,11 @@ import { computed, defineComponent, PropType, reactive, toRefs } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 
 import state from "../../state/adminTableState";
+import { TablePagination } from "../../types/adminTable";
 
 import AppInertiaLink from "../AppInertiaLink.vue";
-import IconArrowNext from "../../components/IconsArrowNext/IconArrowNext.vue";
-import IconArrowPrev from "../../components/IconsArrowPrev/IconArrowPrev.vue";
-
-interface Pagination {
-  current_page: number;
-  data: Array<Record<string, unknown>>;
-  first_page_url: string;
-  from: number;
-  last_page: number;
-  last_page_url: string;
-  links: Array<Record<string, unknown>>;
-  next_page_url: string | null;
-  path: string;
-  per_page: number;
-  prev_page_url: string | null;
-  to: number;
-  total: number;
-}
+import IconArrowNext from "../../components/IconArrowNext/IconArrowNext.vue";
+import IconArrowPrev from "../../components/IconArrowPrev/IconArrowPrev.vue";
 
 interface PageNumber {
   [key: number]: number | string;
@@ -197,7 +182,7 @@ export default defineComponent({
   },
   props: {
     pagination: {
-      type: Object as PropType<Pagination>,
+      type: Object as PropType<TablePagination>,
       required: true,
     },
     advanced: {

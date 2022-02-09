@@ -20,8 +20,8 @@ import { computed, defineComponent } from "vue";
 
 import state from "../../state/adminTableState";
 
-import IconSortUp from "../components/IconsSortUp/IconSortUp.vue";
-import IconSortDown from "@/Components/IconsSortDown/IconSortDown.vue";
+import IconSortUp from "../../components/IconSortUp/IconSortUp.vue";
+import IconSortDown from "../../components/IconSortDown/IconSortDown.vue";
 
 export default defineComponent({
   name: "SltAdminTableHeader",
