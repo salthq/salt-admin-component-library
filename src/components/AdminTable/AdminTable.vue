@@ -30,7 +30,7 @@
                   :key="column.label"
                   @click="column.sort ? searchOrSort(null, column.sort) : ''"
                   :label="column.label"
-                  :sort="column.sort"
+                  :sort="column.sort ?? undefined"
                 />
               </tr>
             </thead>
@@ -48,8 +48,8 @@
           <slot name="empty"> </slot>
         </div>
         <admin-table-pagination
-          v-if="hasPagination && table.total"
-          :pagination="table"
+          v-if="hasPagination && tablePagination?.total"
+          :pagination="tablePagination"
         />
       </div>
     </div>
@@ -57,7 +57,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, PropType, reactive } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  PropType,
+  reactive,
+  toRefs,
+} from "vue";
 
 import state from "../../state/adminTableState";
 
@@ -207,6 +214,7 @@ export default defineComponent({
     });
 
     return {
+      ...toRefs(state),
       emptyTable,
       searchOrSort,
       toggleSelectAll,

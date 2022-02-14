@@ -33,6 +33,7 @@ export default defineComponent({
     sort: {
       type: String,
       required: false,
+      default: null,
     },
   },
   components: { IconSortUp, IconSortDown },

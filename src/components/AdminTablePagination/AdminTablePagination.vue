@@ -8,19 +8,18 @@
         v-if="moreThanOnePage"
         class="flex justify-between items-center text-gray-700"
       >
-        <span class="mr-2">{{ $t("table.pagination.rowsPerPage") }}</span>
+        <span class="mr-2">Rows per page: </span>
         <select
           class="bg-white"
           name="Rows per page"
           id="rows_per_page"
-          v-model="perPage"
           @change="adjustRowsPerPage"
         >
           <option
             :key="option"
             v-for="option in filteredRowOptions"
             :value="option"
-            :selected="option === perPage"
+            :selected="option === tablePerPageOption"
           >
             {{ option }}
           </option>
@@ -30,13 +29,8 @@
       <!-- Current page indicator -->
       <div>
         <p class="text-sm leading-5 text-gray-700">
-          {{
-            $t("nav.pagination.showing", {
-              start: pagination.from,
-              end: pagination.to,
-              total: pagination.total,
-            })
-          }}
+          Showing {{ pagination.from }} to {{ pagination.to }} of
+          {{ pagination.total }} results
         </p>
       </div>
 
@@ -53,8 +47,8 @@
               'opacity-50 text-gray-300 cursor-default':
                 !pagination.prev_page_url,
             }"
-            :aria-label="$t('nav.pagination.previous')"
-            title="$t('nav.pagination.previous')"
+            aria-label="previous"
+            title="Previous"
           >
             <icon-arrow-prev fill="grey-darkest" />
           </app-inertia-link>
@@ -67,8 +61,8 @@
               'opacity-50 text-gray-300 cursor-default':
                 !pagination.next_page_url,
             }"
-            aria-label="$t('nav.pagination.next')"
-            title="$t('nav.pagination.next')"
+            aria-label="next"
+            title="Next"
           >
             <icon-arrow-next fill="grey-darkest" />
           </app-inertia-link>
@@ -86,8 +80,8 @@
               'opacity-50 text-gray-300 cursor-default':
                 !pagination.prev_page_url,
             }"
-            aria-label="$t('nav.pagination.previous')"
-            title="$t('nav.pagination.previous')"
+            aria-label="Next"
+            title="Previous"
           >
             <icon-arrow-prev fill="grey-darkest" />
           </app-inertia-link>
@@ -97,7 +91,7 @@
             :href="pageUrl(page)"
             tag="button"
             class="-ml-px shadow-sm relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 transition ease-in-out duration-150"
-            v-bind:class="[
+            :class="[
               {
                 'cursor-default font-bold bg-primary-100':
                   pageNumbers[page] === pagination.current_page,
@@ -122,8 +116,8 @@
               'opacity-50 text-gray-300 cursor-default':
                 !pagination.next_page_url,
             }"
-            aria-label="$t('nav.pagination.next')"
-            title="$t('nav.pagination.next')"
+            aria-label="Next"
+            title="Next"
           >
             <icon-arrow-next fill="grey-darkest" />
           </app-inertia-link>
@@ -149,7 +143,7 @@
               title="$t('nav.pagination.next')"
               v-on:click="userAlert()"
             >
-              {{ $t("global.action.go") }}
+              Go
             </app-inertia-link>
           </div>
         </nav>
@@ -326,11 +320,13 @@ export default defineComponent({
       adjustRowsPerPage,
       filteredRowOptions,
       moreThanOnePage,
+      pageNumbers,
       pageUrl,
       prevPageUrl,
       nextPageUrl,
       validatePageInput,
       userAlert,
+      ...toRefs(data),
       ...toRefs(state),
     };
   },
