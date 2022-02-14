@@ -10,6 +10,7 @@ import AdminFormInput from "./AdminFormInput";
 import AdminFormSelect from "./AdminFormSelect";
 import AdminFormTextArea from "./AdminFormTextArea";
 import AdminFormToggle from "./AdminFormToggle";
+import AdminFormWrapper from "./AdminFormWrapper";
 import AdminLinkButton from "./AdminLinkButton";
 import AdminRemoveBadge from "./AdminRemoveBadge";
 
@@ -26,6 +27,7 @@ export {
   AdminFormSelect,
   AdminFormTextArea,
   AdminFormToggle,
+  AdminFormWrapper,
   AdminLinkButton,
   AdminRemoveBadge,
 };
