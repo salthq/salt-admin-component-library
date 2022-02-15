@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, withDefaults } from "vue";
+import { computed } from "vue";
 
 import IconArchive from "../IconArchive/IconArchive.vue";
 import IconCopy from "../IconCopy/IconCopy.vue";

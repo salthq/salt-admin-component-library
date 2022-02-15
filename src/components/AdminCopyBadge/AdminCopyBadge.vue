@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from "vue";
 import IconCopy from "../IconCopy/IconCopy.vue";
 
 defineProps<{

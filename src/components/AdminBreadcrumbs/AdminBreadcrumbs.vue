@@ -32,8 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 import AppInertiaLink from "../AppInertiaLink.vue";
 
 interface Breadcrumb {

@@ -32,8 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, withDefaults } from "vue";
-
 import AdminButton from "../AdminButton/AdminButton.vue";
 
 const emit = defineEmits<{

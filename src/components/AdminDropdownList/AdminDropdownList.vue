@@ -83,15 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  defineEmits,
-  defineProps,
-  onMounted,
-  reactive,
-  toRefs,
-  withDefaults,
-} from "vue";
+import { computed, onMounted, reactive, toRefs } from "vue";
 
 import IconRemove from "../../components/IconRemove/IconRemove.vue";
 
