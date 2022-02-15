@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex items-start py-4">
+  <div :id="inputId" class="relative flex items-start py-4">
     <div class="absolute flex items-center">
       <span
         role="checkbox"
@@ -69,50 +69,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
 
-export default defineComponent({
-  name: "SltAdminFormToggle",
-  props: {
-    inputID: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    info: {
-      type: String,
-    },
-    value: {
-      type: Boolean,
-      required: false,
-    },
-    readonly: {
-      type: Boolean,
-      required: false,
-    },
-  },
-  setup(props, { emit }) {
-    props = reactive(props);
+const emit = defineEmits<{
+  (event: "input", value: boolean): void;
+}>();
 
-    const state = reactive({
-      checked: props.value ? props.value : false,
-    });
+const props = defineProps<{
+  inputId: string;
+  label: string;
+  info?: string;
+  readonly?: boolean;
+  value?: boolean;
+}>();
 
-    const toggleChecked = () => {
-      if (!props.readonly) {
-        state.checked = !state.checked;
-        emit("input", state.checked);
-      }
-    };
+const checked = ref(false);
 
-    return {
-      ...toRefs(state),
-      toggleChecked,
-    };
-  },
+onMounted(() => {
+  checked.value = props.value ?? false;
 });
+
+const toggleChecked = () => {
+  if (!props.readonly) {
+    checked.value = !checked.value;
+    emit("input", checked.value);
+  }
+};
 </script>
