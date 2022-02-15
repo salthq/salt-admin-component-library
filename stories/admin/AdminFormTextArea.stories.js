@@ -80,12 +80,13 @@ export const WithCharacterLimit = (args) => ({
       args,
     };
   },
-  template: `<slt-admin-form-text-area maxlength="100" v-bind="args" />`,
+  template: `<slt-admin-form-text-area  v-bind="args" />`,
 });
 
 WithCharacterLimit.args = {
   inputId: "example_textarea",
   label: "About",
+  maxLength: 100,
   value:
     "Maecenas non velit vitae dolor molestie tempor. In felis risus, sodales vitae neque eget, dignissim.",
 };

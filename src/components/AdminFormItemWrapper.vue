@@ -18,28 +18,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "SltAdminFormItemWrapper",
-  props: {
-    inputId: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: false,
-    },
-    info: {
-      type: String,
-      required: false,
-    },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  inputId: string;
+  label?: string;
+  info?: string;
+  required?: boolean;
+}>();
 </script>
