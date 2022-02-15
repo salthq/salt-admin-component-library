@@ -1,36 +1,29 @@
 import { shallowMount } from "@vue/test-utils";
 import { assert } from "chai";
 
+import { nextTick } from "vue";
+
 import AdminAlertWrapper from "../../src/components/AdminAlertWrapper/AdminAlertWrapper.vue";
 
 let wrapper;
 
 describe("AdminAlertWrapper.vue", () => {
   it("exists if visible property is true", () => {
-    wrapper = shallowMount(AdminAlertWrapper, {
-      data() {
-        return {
-          visible: true,
-        };
-      },
-    });
+    wrapper = shallowMount(AdminAlertWrapper);
+    wrapper.vm.visible = true;
 
     const component = wrapper.find(".alert-wrapper");
 
     assert.isTrue(component.exists());
   });
 
-  it("does not exist if visible property is false", () => {
-    wrapper = shallowMount(AdminAlertWrapper, {
-      data() {
-        return {
-          visible: false,
-        };
-      },
-    });
+  it("does not exist if visible property is false", async () => {
+    wrapper = shallowMount(AdminAlertWrapper);
+    wrapper.vm.visible = false;
+
+    await nextTick();
 
     const component = wrapper.find(".alert-wrapper");
-
     assert.isFalse(component.exists());
   });
 
