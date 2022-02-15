@@ -1,5 +1,6 @@
 import SltAdminButton from "../../components/AdminButton/AdminButton.vue";
 import SltAdminFormWrapper from "../../components/AdminFormWrapper/AdminFormWrapper.vue";
+import SltAdminFormHeading from "../../components/AdminFormHeading/AdminFormHeading.vue";
 
 export default {
   title: "Admin/Forms/Wrapper",
@@ -23,13 +24,13 @@ ContentOnly.args = {
 };
 
 export const WithHeader = (args) => ({
-  components: { SltAdminFormWrapper },
+  components: { SltAdminFormWrapper, SltAdminFormHeading },
   setup() {
     return { args };
   },
   template: `<slt-admin-form-wrapper v-bind="args">
     <template #header>
-        {{args.header}}
+      <slt-admin-form-heading :title="args.title" />
     </template>
     <template #content>
         {{args.content}}
@@ -38,18 +39,18 @@ export const WithHeader = (args) => ({
 });
 
 WithHeader.args = {
-  header: "Form header",
+  title: "Form header",
   content: "Form content",
 };
 
 export const WithCustomActions = (args) => ({
-  components: { SltAdminFormWrapper, SltAdminButton },
+  components: { SltAdminFormWrapper, SltAdminFormHeading, SltAdminButton },
   setup() {
     return { args };
   },
   template: `<slt-admin-form-wrapper v-bind="args">
     <template #header>
-        {{args.header}}
+      <slt-admin-form-heading :title="args.title" />
     </template>
     <template #content>
         {{args.content}}
@@ -69,6 +70,6 @@ export const WithCustomActions = (args) => ({
 });
 
 WithCustomActions.args = {
-  header: "Form header",
+  title: "Form header",
   content: "Form content",
 };
