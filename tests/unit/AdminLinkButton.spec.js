@@ -9,7 +9,7 @@ const url = "/admin/";
 describe("AdminLinkButton.vue", () => {
   it("displays the value of the text prop", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text },
+      props: { text, url },
     });
 
     assert.include(wrapper.text(), text);
@@ -27,7 +27,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-primary' class when variation is primary", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, variation: "primary" },
+      props: { text, url, variation: "primary" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -37,7 +37,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-secondary' class when variation is secondary", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, variation: "secondary" },
+      props: { text, url, variation: "secondary" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -47,7 +47,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-white' class when variation is white", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, variation: "white" },
+      props: { text, url, variation: "white" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -57,7 +57,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-danger' class when variation is danger", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, variation: "danger" },
+      props: { text, url, variation: "danger" },
     });
 
     const link = wrapper.find(".admin-link");
