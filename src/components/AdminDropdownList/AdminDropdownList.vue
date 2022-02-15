@@ -42,8 +42,9 @@
       >
         <div @click="setInputActive">
           <div v-if="showSelection" class="flex justify-between">
-            <span>{{ selectedItem.name }}</span>
+            <span data-test="selected-item-name">{{ selectedItem.name }}</span>
             <span
+              data-test="reset-selection"
               class="cursor-pointer inline-block px-2 hover:text-red-600"
               style="padding-top: 0.25rem"
               @click="resetSelection"
@@ -58,6 +59,7 @@
       <div
         v-show="showItemList"
         class="dropdown-list w-full rounded-md border bg-white border-gray-300 shadow-lg z-10 absolute overflow-y-auto mb-12 mt-0 md:mt-12 md:mb-0"
+        data-test="dropdown-list"
         style="max-height: 15rem"
       >
         <div
@@ -66,6 +68,7 @@
           :title="item.name"
           @click="selectItem(item)"
           class="pl-2 py-1 dropdown-item cursor-pointer hover:bg-blue-500 hover:text-white z-10 relative overflow-y-scroll"
+          data-test="dropdown-list-item"
         >
           <span class="">{{ item.name }}</span>
 
