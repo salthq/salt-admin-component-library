@@ -95,7 +95,7 @@ import { DropdownListItem } from "../../types/adminDropdownList";
 
 const emit = defineEmits<{
   (event: "on-item-reset"): void;
-  (event: "on-item-select", item: DropdownListItem | ""): void;
+  (event: "on-item-select", item: DropdownListItem | null): void;
 }>();
 
 const props = withDefaults(
@@ -168,7 +168,7 @@ onMounted(() => {
       if (!isClickInside && state.inputActive) {
         state.inputActive = false;
         if (!state.selectedItem) {
-          emit("on-item-select", "");
+          emit("on-item-select", null);
         }
       }
     }
