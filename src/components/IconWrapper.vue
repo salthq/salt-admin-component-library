@@ -15,30 +15,11 @@
   </svg>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "SltIconWrapper",
-  props: {
-    fill: {
-      type: String,
-      required: true,
-      default: "currentColor",
-    },
-    size: {
-      type: Number,
-      required: true,
-    },
-    strokeWidth: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    viewBox: {
-      type: String,
-      required: true,
-    },
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  fill: string;
+  size: number;
+  strokeWidth: number;
+  viewBox: string;
+}>();
 </script>

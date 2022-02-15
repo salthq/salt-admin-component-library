@@ -1,7 +1,5 @@
-<!-- viewBox="0 0 24 24" -->
-
 <template>
-  <icon-wrapper v-bind="$props">
+  <icon-wrapper v-bind="props">
     <g>
       <path
         stroke-linecap="round"
@@ -13,33 +11,21 @@
   </icon-wrapper>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import IconWrapper from "../IconWrapper.vue";
-export default {
-  name: "SltIconDrag",
-  components: {
-    IconWrapper,
-  },
-  props: {
-    fill: {
-      type: String,
-      required: false,
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 28,
-    },
-    strokeWidth: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    viewBox: {
-      type: String,
-      required: false,
-      default: "0 0 24 24",
-    },
-  },
-};
+
+const props = withDefaults(
+  defineProps<{
+    fill?: string;
+    size?: number;
+    strokeWidth?: number;
+    viewBox?: string;
+  }>(),
+  {
+    fill: "currentColor",
+    size: 28,
+    strokeWidth: 0,
+    viewBox: "0 0 24 24",
+  }
+);
 </script>

@@ -1,6 +1,5 @@
-<!-- Viewport: 0 0 32 32 -->
 <template>
-  <icon-wrapper v-bind="$props">
+  <icon-wrapper v-bind="props">
     <g id="funnel">
       <rect width="32" height="32" style="fill: none" />
       <path
@@ -10,33 +9,21 @@
   </icon-wrapper>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import IconWrapper from "../IconWrapper.vue";
-export default {
-  name: "SltIconFilter",
-  components: {
-    IconWrapper,
-  },
-  props: {
-    fill: {
-      type: String,
-      required: false,
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 20,
-    },
-    strokeWidth: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    viewBox: {
-      type: String,
-      required: false,
-      default: "0 0 32 32",
-    },
-  },
-};
+
+const props = withDefaults(
+  defineProps<{
+    fill?: string;
+    size?: number;
+    strokeWidth?: number;
+    viewBox?: string;
+  }>(),
+  {
+    fill: "currentColor",
+    size: 20,
+    strokeWidth: 0,
+    viewBox: "0 0 32 32",
+  }
+);
 </script>

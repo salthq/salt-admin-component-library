@@ -1,7 +1,5 @@
-<!-- viewBox="0 0 10 8" -->
-
 <template>
-  <icon-wrapper v-bind="$props">
+  <icon-wrapper v-bind="props">
     <g>
       <path
         fill-rule="evenodd"
@@ -12,33 +10,21 @@
   </icon-wrapper>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import IconWrapper from "../IconWrapper.vue";
-export default {
-  name: "SltIconTick",
-  components: {
-    IconWrapper,
-  },
-  props: {
-    fill: {
-      type: String,
-      required: false,
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 18,
-    },
-    strokeWidth: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    viewBox: {
-      type: String,
-      required: false,
-      default: "0 0 10 8",
-    },
-  },
-};
+
+const props = withDefaults(
+  defineProps<{
+    fill?: string;
+    size?: number;
+    strokeWidth?: number;
+    viewBox?: string;
+  }>(),
+  {
+    fill: "currentColor",
+    size: 18,
+    strokeWidth: 0,
+    viewBox: "0 0 10 8",
+  }
+);
 </script>
