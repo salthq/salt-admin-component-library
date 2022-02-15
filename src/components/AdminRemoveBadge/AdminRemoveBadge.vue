@@ -7,34 +7,23 @@
   >
     <span v-if="label">{{ label }}:</span>
     <span class="ml-3 font-medium mr-3">{{ text }}</span>
-    <icon-remove :size="16" :strokeWidth="1" class="mr-1" />
+    <icon-remove :size="16" :stroke-width="1" class="mr-1" />
   </button>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import IconRemove from "../IconRemove/IconRemove.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "SltAdminRemoveBadge",
-  components: {
-    IconRemove,
-  },
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: false,
-    },
-  },
-  emits: ["remove"],
-  methods: {
-    emitRemove() {
-      this.$emit("remove");
-    },
-  },
-});
+const emit = defineEmits<{
+  (event: "remove"): void;
+}>();
+
+defineProps<{
+  label?: string;
+  text: string;
+}>();
+
+const emitRemove = () => {
+  emit("remove");
+};
 </script>
