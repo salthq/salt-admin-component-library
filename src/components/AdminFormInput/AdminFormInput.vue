@@ -13,9 +13,8 @@
         :name="inputId"
         :required="required"
         :readonly="readonly"
-        :type="type ? type : 'text'"
-        :value="inputValue"
-        @input="emitInput($event.target.value)"
+        :type="type"
+        v-model="inputValue"
         class="block w-full shadow-sm appearance-none border rounded py-2 px-3 text-gray-700 sm:text-sm sm:leading-5 transition duration-150 ease-in-out"
       />
       <span
@@ -28,69 +27,37 @@
   </admin-form-item-wrapper>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, reactive, ref, toRefs } from "vue";
+<script setup lang="ts">
+import { ref, watch } from "vue";
 
 import AdminFormItemWrapper from "../AdminFormItemWrapper.vue";
-// import IconLoading from "../IconLoading/IconLoading.vue";
 
 type InputType = "date" | "email" | "number" | "text" | "tel" | "url";
 
-export default defineComponent({
-  name: "SltAdminFormInput",
-  components: {
-    AdminFormItemWrapper,
-    //IconLoading,
-  },
-  props: {
-    inputId: {
-      type: String,
-      required: true,
-    },
-    loading: {
-      type: Boolean,
-      required: false,
-    },
-    label: {
-      type: String,
-      required: false,
-    },
-    info: {
-      type: String,
-      required: false,
-    },
-    readonly: {
-      type: Boolean,
-      required: false,
-    },
-    required: {
-      type: Boolean,
-      required: false,
-    },
-    type: {
-      type: String as PropType<InputType>,
-      required: false,
-    },
-    value: {
-      type: String,
-      required: false,
-    },
-  },
-  setup(props, { emit }) {
-    const test = ref(5);
+const emit = defineEmits<{
+  (event: "input", value: string): void;
+}>();
 
-    const state = reactive({
-      inputValue: props.value ? props.value : "",
-    });
+const props = withDefaults(
+  defineProps<{
+    inputId: string;
+    loading?: boolean;
+    label?: string;
+    info?: string;
+    readonly?: boolean;
+    required?: boolean;
+    type?: InputType;
+    value?: string;
+  }>(),
+  {
+    type: "text",
+    value: "",
+  }
+);
 
-    const emitInput = (value: string) => {
-      emit("input", value);
-    };
+const inputValue = ref(props.value);
 
-    return {
-      ...toRefs(state),
-      emitInput,
-    };
-  },
+watch(inputValue, () => {
+  emit("input", inputValue.value);
 });
 </script>

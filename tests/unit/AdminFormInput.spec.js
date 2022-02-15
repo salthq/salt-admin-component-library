@@ -1,6 +1,8 @@
 import { mount } from "@vue/test-utils";
 import { assert } from "chai";
 
+import { nextTick } from "vue";
+
 import AdminFormInput from "@/components/AdminFormInput/AdminFormInput.vue";
 import AdminFormItemWrapper from "@/components/AdminFormItemWrapper.vue";
 
@@ -48,21 +50,16 @@ describe("AdminFormInput.vue", () => {
       components: { AdminFormItemWrapper },
     });
 
-    const inputVal = "test";
+    const inputVal = "testInput";
 
     const input = wrapper.find("input");
-    await input.setValue(inputVal);
+    input.setValue(inputVal);
+
+    await nextTick();
 
     assert.equal(input.element.value, inputVal);
     assert.exists(wrapper.emitted().input);
 
-    /**
-     * This should work,
-     * but it fails with the following error:
-     * AssertionError: expected [ 'test' ] to equal [ 'test' ]
-     *
-     * What?!
-     */
-    // assert.equal(wrapper.emitted().input[0], [inputVal]);
+    assert.equal(wrapper.emitted().input[0].shift(), inputVal);
   });
 });
