@@ -83,34 +83,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { defineProps, ref, withDefaults } from "vue";
 
 type variationType = "success" | "warning" | "failure";
 
-export default defineComponent({
-  name: "SltAdminAlertWrapper",
-  props: {
-    dismissable: {
-      default: false,
-      type: Boolean,
-      required: false,
-    },
-    variation: {
-      type: String as PropType<variationType>,
-      default: "success",
-      required: false,
-    },
-  },
-  data() {
-    return {
-      visible: true,
-    };
-  },
-  methods: {
-    closeAlert() {
-      this.visible = false;
-    },
-  },
-});
+withDefaults(
+  defineProps<{
+    dismissable?: boolean;
+    variation?: variationType;
+  }>(),
+  {
+    dismissable: false,
+    variation: "success",
+  }
+);
+
+const visible = ref(true);
+
+const closeAlert = () => {
+  visible.value = false;
+};
 </script>

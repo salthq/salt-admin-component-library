@@ -3,12 +3,13 @@ import { assert } from "chai";
 
 import AdminCopyBadge from "../../src/components/AdminCopyBadge/AdminCopyBadge.vue";
 
+const text = "Test text";
+
 describe("AdminCopyBadge.vue", () => {
   it("displays the value of text added in the text slot", () => {
-    const text = "Test text";
     const wrapper = mount(AdminCopyBadge, {
-      slots: {
-        text: () => text,
+      props: {
+        text: text,
       },
     });
 
@@ -18,6 +19,9 @@ describe("AdminCopyBadge.vue", () => {
   it("displays the value of the label added in the label slot", () => {
     const label = "Test label";
     const wrapper = mount(AdminCopyBadge, {
+      props: {
+        text: text,
+      },
       slots: {
         label: () => label,
       },
@@ -27,17 +31,15 @@ describe("AdminCopyBadge.vue", () => {
   });
 
   it("emits 'copy' with the value of the text when clicked", () => {
-    const text = "copy me";
-
     const wrapper = mount(AdminCopyBadge, {
-      slots: {
-        text: () => text,
+      props: {
+        text: text,
       },
     });
 
     const copyButton = wrapper.find("button");
     copyButton.trigger("click");
 
-    assert.isOk(wrapper.emitted("copyText"));
+    assert.isOk(wrapper.emitted("copyText", text));
   });
 });

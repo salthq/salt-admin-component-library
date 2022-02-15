@@ -31,8 +31,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { PropType } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 
 import AppInertiaLink from "../AppInertiaLink.vue";
 
@@ -41,16 +41,7 @@ interface Breadcrumb {
   title: string;
 }
 
-export default {
-  name: "SltAdminBreadcrumbs",
-  components: {
-    AppInertiaLink,
-  },
-  props: {
-    breadcrumbs: {
-      required: true,
-      type: Array as PropType<Array<Breadcrumb>>,
-    },
-  },
-};
+defineProps<{
+  breadcrumbs: Array<Breadcrumb>;
+}>();
 </script>

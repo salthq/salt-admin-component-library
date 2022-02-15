@@ -20,25 +20,19 @@
   </div>
 </template>
 
-<script>
-import { computed, defineComponent } from "vue";
+<script setup lang="ts">
+import { computed, defineProps, withDefaults } from "vue";
 
-export default defineComponent({
-  name: "SltAdminCardWrapper",
-  props: {
-    hasPadding: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup(props) {
-    const paddingClasses = computed(() => ({
-      "py-6 px-4 sm:px-6 lg:px-8": props.hasPadding,
-    }));
+const props = withDefaults(
+  defineProps<{
+    hasPadding?: boolean;
+  }>(),
+  {
+    hasPadding: true,
+  }
+);
 
-    return {
-      paddingClasses,
-    };
-  },
-});
+const paddingClasses = computed(() => ({
+  "py-6 px-4 sm:px-6 lg:px-8": props.hasPadding,
+}));
 </script>

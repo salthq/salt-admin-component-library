@@ -13,33 +13,24 @@
   </span>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType, reactive } from "vue";
+<script setup lang="ts">
+import { computed, defineProps, withDefaults } from "vue";
 
 type variationType = "default" | "success" | "warning" | "failure";
 
-export default defineComponent({
-  name: "SltAdminBadge",
-  props: {
-    variation: {
-      type: String as PropType<variationType>,
-      default: "default",
-      required: false,
-    },
-  },
-  setup(props) {
-    props = reactive(props);
+const props = withDefaults(
+  defineProps<{
+    variation?: variationType;
+  }>(),
+  {
+    variation: "default",
+  }
+);
 
-    const variationClasses = computed(() => ({
-      "admin-badge-default bg-gray-200": props.variation === "default",
-      "admin-badge-success bg-green-200": props.variation === "success",
-      "admin-badge-warning bg-yellow-100": props.variation === "warning",
-      "admin-badge-failure bg-red-200": props.variation === "failure",
-    }));
-
-    return {
-      variationClasses,
-    };
-  },
-});
+const variationClasses = computed(() => ({
+  "admin-badge-default bg-gray-200": props.variation === "default",
+  "admin-badge-success bg-green-200": props.variation === "success",
+  "admin-badge-warning bg-yellow-100": props.variation === "warning",
+  "admin-badge-failure bg-red-200": props.variation === "failure",
+}));
 </script>

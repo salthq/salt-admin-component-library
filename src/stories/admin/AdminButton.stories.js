@@ -10,7 +10,7 @@ export default {
     },
     icon: {
       control: { type: "select" },
-      options: ["", "icon-archive", "icon-copy"],
+      options: ["", "IconArchive", "IconCopy"],
     },
     loading: {
       defaultValue: false,
@@ -52,6 +52,6 @@ export const WithIcon = Template.bind({});
 WithIcon.args = {
   type: "button",
   variation: "secondary",
-  icon: "icon-copy",
+  icon: "IconCopy",
   label: "Copy",
 };

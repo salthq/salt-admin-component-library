@@ -27,7 +27,6 @@ export const WithLabel = (args) => ({
   },
   template: `<slt-admin-copy-badge v-bind="args">
     <template #label>{{args.label}}</template>
-    <template #text>{{args.text}}</template>
   </slt-admin-copy-badge>`,
 });
 
@@ -42,7 +41,6 @@ export const WithoutLabel = (args) => ({
     return { args };
   },
   template: `<slt-admin-copy-badge v-bind="args">
-    <template #text>{{args.text}}</template>
   </slt-admin-copy-badge>`,
 });
 

@@ -1,7 +1,8 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import { assert } from "chai";
 
-import AdminButton from "../../src/components/AdminButton/AdminButton.vue";
+import AdminButton from "@/components/AdminButton/AdminButton.vue";
+import IconCopy from "@/components/IconCopy/IconCopy.vue";
 
 const label = "Test text";
 
@@ -52,6 +53,16 @@ describe("AdminButton.vue", () => {
     const button = wrapper.find("button");
 
     assert.isTrue(button.classes("admin-button-disabled"));
+  });
+
+  it("has an icon component if the icon prop is set to a valid value", () => {
+    const wrapper = mount(AdminButton, {
+      props: { label, disabled: true, icon: "IconCopy" },
+    });
+
+    const icon = wrapper.findComponent(IconCopy);
+
+    assert.isTrue(icon.exists());
   });
 
   it("emits a 'clicked' event when clicked", () => {

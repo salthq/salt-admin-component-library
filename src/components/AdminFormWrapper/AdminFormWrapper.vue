@@ -40,7 +40,7 @@ const emit = defineEmits<{
   (e: "submit", event: Event): void;
 }>();
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     button: string;
     changed: boolean;
