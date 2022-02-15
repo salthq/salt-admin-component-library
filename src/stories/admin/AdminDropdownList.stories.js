@@ -17,32 +17,30 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  itemIdentifier: "value",
-  itemLabel: "label",
   itemList: [
     {
-      value: "document",
-      label: "Document",
+      id: "document",
+      name: "Document",
     },
     {
-      value: "file",
-      label: "File",
+      id: "file",
+      name: "File",
     },
     {
-      value: "link",
-      label: "Link",
+      id: "link",
+      name: "Link",
     },
     {
-      value: "presentation",
-      label: "Presentation",
+      id: "presentation",
+      name: "Presentation",
     },
     {
-      value: "spreadsheet",
-      label: "Spreadsheet",
+      id: "spreadsheet",
+      name: "Spreadsheet",
     },
     {
-      value: "folder",
-      label: "Folder",
+      id: "folder",
+      name: "Folder",
     },
   ],
 };

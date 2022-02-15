@@ -5,12 +5,9 @@
       class="dropdown relative flex flex-row-reverse md:flex-col"
     >
       <!-- Dropdown menu button/search input -->
-      <div
-        class="relative"
-        v-if="Object.keys(selectedItem).length === 0 || !showSelection"
-      >
+      <div class="relative" v-if="!selectedItem || !showSelection">
         <input
-          @click="inputActive = true"
+          @click="setInputActive"
           ref="dropdowninput"
           v-model.trim="inputValue"
           type="search"
@@ -43,9 +40,9 @@
         v-else
         class="dropdown-selected w-full py-2 pl-3 border border-gray-300 rounded-md cursor-pointer"
       >
-        <div @click="inputActive = true">
+        <div @click="setInputActive">
           <div v-if="showSelection" class="flex justify-between">
-            <span>{{ selectedItem[itemLabel] }}</span>
+            <span>{{ selectedItem.name }}</span>
             <span
               class="cursor-pointer inline-block px-2 hover:text-red-600"
               style="padding-top: 0.25rem"
@@ -65,12 +62,12 @@
       >
         <div
           v-for="item in searchDropdownList"
-          :key="item[itemIdentifier]"
-          :title="item[itemLabel]"
+          :key="item.id"
+          :title="item.name"
           @click="selectItem(item)"
           class="pl-2 py-1 dropdown-item cursor-pointer hover:bg-blue-500 hover:text-white z-10 relative overflow-y-scroll"
         >
-          <span class="">{{ item[itemLabel] }}</span>
+          <span class="">{{ item.name }}</span>
 
           <slot name="option"></slot>
         </div>
@@ -82,121 +79,104 @@
   </div>
 </template>
 
-<script>
-import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
-
-import searchWithFuse from "../../composables/dropdown/searchWithFuse";
+<script setup lang="ts">
+import {
+  computed,
+  defineEmits,
+  defineProps,
+  onMounted,
+  reactive,
+  toRefs,
+  withDefaults,
+} from "vue";
 
 import IconRemove from "../../components/IconRemove/IconRemove.vue";
 
-export default defineComponent({
-  name: "SltAdminDropdownList",
-  components: {
-    IconRemove,
-  },
-  props: {
-    // The unique field which identifies each item in the list
-    itemIdentifier: {
-      required: false,
-      default: "id",
-    },
-    // The field to be used to display each item
-    itemLabel: {
-      type: String,
-      required: false,
-      default: "name",
-    },
-    // The list of items displayed when the dropdown is activated
-    itemList: {
-      type: Array,
-      required: true,
-    },
-    // The text shown when the dropdown input is inactive and nothing has been selected
-    placeholder: {
-      type: String,
-      required: false,
-      default: "Select or search...",
-    },
-    // The optional existing selection from a prior session
-    existingSelection: {
-      type: Object,
-      required: false,
-    },
-    // Optional boolean for showing selection (input) or not
-    showSelection: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup(props, { emit }) {
-    const state = reactive({
-      inputActive: false,
-      inputValue: "",
-      selectedItem: {},
-      uniqueId: "dropdown_" + (Math.random() * 1e32).toString(36),
-    });
+// Composables
+import searchWithFuse from "../../composables/dropdown/searchWithFuse";
 
-    const { searchList } = searchWithFuse();
+// Types
+import { DropdownListItem } from "../../types/adminDropdownList";
 
-    const noResultsFound = computed(() => {
-      return searchDropdownList.value.length < 1;
-    });
+const emit = defineEmits<{
+  (event: "on-item-reset"): void;
+  (event: "on-item-select", item: DropdownListItem | ""): void;
+}>();
 
-    const searchDropdownList = computed(() => {
-      return searchList(state.inputValue, props.itemList, props.itemLabel);
-    });
+const props = withDefaults(
+  defineProps<{
+    existingSelection?: DropdownListItem;
+    itemList: Array<DropdownListItem>;
+    placeholder?: string;
+    showSelection?: boolean;
+  }>(),
+  {
+    placeholder: "Select or search...",
+    showSelection: true,
+  }
+);
 
-    const showItemList = computed(() => {
-      return state.inputActive;
-    });
+interface AdminDropdownListState {
+  inputActive: boolean;
+  inputValue: string;
+  selectedItem: DropdownListItem | null;
+  uniqueId: string;
+}
 
-    const itemVisible = (item) => {
-      if (!state.inputValue) return true;
+const state: AdminDropdownListState = reactive({
+  inputActive: false,
+  inputValue: "",
+  selectedItem: null,
+  uniqueId: "dropdown_" + (Math.random() * 1e32).toString(36),
+});
 
-      let currentName = item[props.itemLabel].toLowerCase();
-      let currentInput = state.inputValue.toLowerCase();
-      return currentName.includes(currentInput);
-    };
+const { inputValue, selectedItem, uniqueId } = toRefs(state);
 
-    const resetSelection = () => {
-      state.selectedItem = {};
-      state.inputActive = false;
-      emit("on-item-reset", "");
-    };
+const { searchList } = searchWithFuse();
 
-    const selectItem = (item) => {
-      state.selectedItem = item;
-      state.inputActive = false;
-      state.inputValue = "";
-      emit("on-item-select", item);
-    };
+const noResultsFound = computed(() => {
+  return searchDropdownList.value.length < 1;
+});
 
-    onMounted(() => {
-      if (props.existingSelection) state.selectedItem = props.existingSelection;
-      const thisElement = document.getElementById(state.uniqueId);
+const searchDropdownList = computed(() => {
+  return searchList(state.inputValue, props.itemList);
+});
 
-      document.addEventListener("click", (event) => {
-        if (event.target instanceof Element) {
-          const isClickInside = thisElement.contains(event.target);
-          if (!isClickInside && state.inputActive) {
-            state.inputActive = false;
-            if (Object.keys(state.selectedItem).length === 0) {
-              emit("on-item-selected", "");
-            }
-          }
+const showItemList = computed(() => {
+  return state.inputActive;
+});
+
+const resetSelection = () => {
+  state.selectedItem = null;
+  state.inputActive = false;
+  emit("on-item-reset");
+};
+
+const selectItem = (item: DropdownListItem) => {
+  state.selectedItem = item;
+  state.inputActive = false;
+  state.inputValue = "";
+  emit("on-item-select", item);
+};
+
+const setInputActive = () => {
+  state.inputActive = true;
+};
+
+onMounted(() => {
+  if (props.existingSelection) state.selectedItem = props.existingSelection;
+  const thisElement = document.getElementById(state.uniqueId);
+
+  document.addEventListener("click", (event) => {
+    if (event.target instanceof Element) {
+      const isClickInside = thisElement?.contains(event.target);
+      if (!isClickInside && state.inputActive) {
+        state.inputActive = false;
+        if (!state.selectedItem) {
+          emit("on-item-select", "");
         }
-      });
-    });
-
-    return {
-      ...toRefs(state),
-      itemVisible,
-      noResultsFound,
-      resetSelection,
-      selectItem,
-      searchDropdownList,
-      showItemList,
-    };
-  },
+      }
+    }
+  });
 });
 </script>
