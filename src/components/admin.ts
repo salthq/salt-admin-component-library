@@ -5,7 +5,7 @@ import AdminButton from "./AdminButton";
 import AdminCardWrapper from "./AdminCardWrapper";
 import AdminCopyBadge from "./AdminCopyBadge";
 import AdminDropdownList from "./AdminDropdownList";
-import AdminDropdownListMultiLabel from "./AdminDropdownListMultiLabel";
+import AdminFormHeading from "./AdminFormHeading";
 import AdminFormInput from "./AdminFormInput";
 import AdminFormSelect from "./AdminFormSelect";
 import AdminFormTextArea from "./AdminFormTextArea";
@@ -22,7 +22,7 @@ export {
   AdminCardWrapper,
   AdminCopyBadge,
   AdminDropdownList,
-  AdminDropdownListMultiLabel,
+  AdminFormHeading,
   AdminFormInput,
   AdminFormSelect,
   AdminFormTextArea,
