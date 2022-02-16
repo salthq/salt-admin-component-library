@@ -43,3 +43,9 @@ defineProps<{
   breadcrumbs: Array<Breadcrumb>;
 }>();
 </script>
+
+<script lang="ts">
+export default {
+  name: "SltAdminBreadcrumbs",
+};
+</script>

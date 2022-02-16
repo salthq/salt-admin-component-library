@@ -8,7 +8,7 @@ import { registerPlugin } from "./utils/plugins";
 
 import { InertiaLink } from "@inertiajs/inertia-vue3";
 
-import FakeInertiaLink from "./FakeInertiaLink.vue";
+import FakeInertiaLink from "./components/FakeInertiaLink.vue";
 
 const SltAdminComponentLibrary = {
   install(app: App, link: InertiaLink | null): void {
