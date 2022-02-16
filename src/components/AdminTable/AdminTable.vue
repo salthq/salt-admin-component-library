@@ -56,15 +56,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  PropType,
-  reactive,
-  toRefs,
-} from "vue";
+<script setup lang="ts">
+import { computed, onMounted, reactive, toRefs } from "vue";
 
 import state from "../../state/adminTableState";
 
@@ -74,151 +67,120 @@ import AdminTableHeader from "../AdminTableHeader/AdminTableHeader.vue";
 import AdminTablePagination from "../AdminTablePagination/AdminTablePagination.vue";
 import IconLoading from "../../components/IconLoading/IconLoading.vue";
 
-export default defineComponent({
-  name: "SltAdminTable",
-  components: {
-    AdminTableHeader,
-    AdminTablePagination,
-    IconLoading,
-  },
-  props: {
-    tableData: {
-      type: Object as PropType<TableData>,
-      default: null,
-    },
-    tablePagination: {
-      type: Object as PropType<TablePagination>,
-      required: false,
-    },
-    hasFilters: {
-      type: Boolean,
-      default: false,
-    },
-    hasPagination: {
-      type: Boolean,
-      default: false,
-    },
-    hasSearch: {
-      type: Boolean,
-      default: false,
-    },
-    hasSelect: {
-      type: Boolean,
-      default: false,
-    },
-    hasExport: {
-      type: Boolean,
-      default: false,
-    },
-    columns: {
-      type: Array as PropType<Array<Columns>>,
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup(props, { emit }) {
-    const data = reactive({
-      currentSort: "id",
-      currentSortDir: "asc",
-    });
+interface SearchForm {
+  query: string;
+  column: string;
+  direction: string;
+  [key: string]: string | number;
+}
 
-    const allRowIds = computed((): number[] => {
-      return props.tableData.map((item) => {
-        if (item.user_id) return item.user_id;
+const emit = defineEmits<{
+  (event: "search", form: SearchForm): void;
+}>();
 
-        return item.id;
-      }) as number[];
-    });
+const props = withDefaults(
+  defineProps<{
+    tableData: TableData;
+    tablePagination?: TablePagination;
+    hasFilters?: boolean;
+    hasPagination?: boolean;
+    hasSearch?: boolean;
+    hasSelect?: boolean;
+    hasExport?: boolean;
+    columns: Array<Columns>;
+    loading?: boolean;
+  }>(),
+  {}
+);
 
-    const emptyTable = computed(() => {
-      return !props.tableData?.length;
-    });
+const data = reactive({
+  currentSort: "id",
+  currentSortDir: "asc",
+});
 
-    const searchOrSort = (query: string | null, sort: string | null) => {
-      if (query === null) {
-        query = state.activeQuery;
-      }
+const { allRowsSelected } = toRefs(state);
 
-      if (sort && sort === data.currentSort) {
-        data.currentSortDir = data.currentSortDir === "asc" ? "desc" : "asc";
-        state.activeSortState = data.currentSortDir;
-      }
+const allRowIds = computed((): number[] => {
+  return props.tableData.map((item) => {
+    if (item.user_id) return item.user_id;
 
-      if (sort) {
-        data.currentSort = sort;
-      } else {
-        data.currentSort = state.activeSortColumn;
-        data.currentSortDir = state.activeSortState;
-      }
+    return item.id;
+  }) as number[];
+});
 
-      state.activeSortColumn = data.currentSort;
-      state.activeQuery = query;
+const emptyTable = computed(() => {
+  return !props.tableData?.length;
+});
 
-      const params = new URLSearchParams(location.search);
+const searchOrSort = (query: string | null, sort: string | null) => {
+  if (query === null) {
+    query = state.activeQuery;
+  }
 
-      let form = {
-        query: query,
-        column: data.currentSort,
-        direction: data.currentSortDir,
-      } as {
-        query: string;
-        column: string;
-        direction: string;
-        [key: string]: string | number;
-      };
+  if (sort && sort === data.currentSort) {
+    data.currentSortDir = data.currentSortDir === "asc" ? "desc" : "asc";
+    state.activeSortState = data.currentSortDir;
+  }
 
-      if (props.tablePagination) {
-        form.perPage = props.tablePagination.per_page;
-      }
+  if (sort) {
+    data.currentSort = sort;
+  } else {
+    data.currentSort = state.activeSortColumn;
+    data.currentSortDir = state.activeSortState;
+  }
 
-      for (const [key, value] of params) {
-        if (
-          key !== "query" &&
-          key !== "column" &&
-          key !== "direction" &&
-          key !== "perPage"
-        ) {
-          form.key = value;
-        }
-      }
+  state.activeSortColumn = data.currentSort;
+  state.activeQuery = query;
 
-      emit("search", form);
-    };
+  const params = new URLSearchParams(location.search);
 
-    const toggleSelectAll = () => {
-      state.allUsersSelected = !state.allUsersSelected;
-      state.allRowsSelected = !state.allRowsSelected;
+  let form: SearchForm = {
+    query: query,
+    column: data.currentSort,
+    direction: data.currentSortDir,
+  };
 
-      if (state.allRowsSelected) {
-        state.selectedRows = allRowIds.value;
-      } else {
-        state.selectedRows = [];
-      }
-    };
+  if (props.tablePagination) {
+    form.perPage = props.tablePagination.per_page;
+  }
 
-    onMounted(() => {
-      const params = new URLSearchParams(location.search);
+  for (const [key, value] of params) {
+    if (
+      key !== "query" &&
+      key !== "column" &&
+      key !== "direction" &&
+      key !== "perPage"
+    ) {
+      form.key = value;
+    }
+  }
 
-      if (params.get("column") && params.get("direction")) {
-        state.activeSortColumn = params.get("column") ?? "id";
-        state.activeSortState = params.get("direction") ?? "asc";
-      } else {
-        state.activeSortColumn = data.currentSort;
-        state.activeSortState = data.currentSortDir;
-      }
+  emit("search", form);
+};
 
-      state.allRowIDs = allRowIds.value;
-      state.selectedRows = [];
-    });
+const toggleSelectAll = () => {
+  state.allUsersSelected = !state.allUsersSelected;
+  state.allRowsSelected = !state.allRowsSelected;
 
-    return {
-      ...toRefs(state),
-      emptyTable,
-      searchOrSort,
-      toggleSelectAll,
-    };
-  },
+  if (state.allRowsSelected) {
+    state.selectedRows = allRowIds.value;
+  } else {
+    state.selectedRows = [];
+  }
+};
+
+onMounted(() => {
+  const params = new URLSearchParams(location.search);
+
+  if (params.get("column") && params.get("direction")) {
+    state.activeSortColumn = params.get("column") ?? "id";
+    state.activeSortState = params.get("direction") ?? "asc";
+  } else {
+    state.activeSortColumn = data.currentSort;
+    state.activeSortState = data.currentSortDir;
+  }
+
+  state.allRowIDs = allRowIds.value;
+  state.selectedRows = [];
 });
 </script>

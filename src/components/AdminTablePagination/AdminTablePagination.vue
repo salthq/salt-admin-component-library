@@ -130,7 +130,7 @@
               id="page-number"
               :placeholder="`${pagination.current_page}`"
               class="text-gray-500 focus:text-black shadow-sm relative inline-flex w-12 ml-6 border border-gray-300 px-2 py-2 rounded-md text-sm leading-5"
-              v-model.number="pageInput"
+              v-model="pageInput"
               min="1"
               :max="`${pagination.last_page}`"
             />
@@ -152,9 +152,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType, reactive, toRefs } from "vue";
-import { Inertia } from "@inertiajs/inertia";
+<script setup lang="ts">
+import { computed, reactive, toRefs } from "vue";
+// import { Inertia } from "@inertiajs/inertia";
 
 import state from "../../state/adminTableState";
 import { TablePagination } from "../../types/adminTable";
@@ -167,168 +167,147 @@ interface PageNumber {
   [key: number]: number | string;
 }
 
-export default defineComponent({
-  name: "SltAdminTablePagination",
-  components: {
-    AppInertiaLink,
-    IconArrowPrev,
-    IconArrowNext,
-  },
-  props: {
-    pagination: {
-      type: Object as PropType<TablePagination>,
-      required: true,
-    },
-    advanced: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup(props) {
-    const data = reactive({
-      inputIsValid: true,
-      pageInput: props.pagination.current_page,
-      perPage: props.pagination.per_page,
-      rowOptions: [10, 25, 50, 100],
-    });
+const props = withDefaults(
+  defineProps<{
+    pagination: TablePagination;
+    advanced?: boolean;
+  }>(),
+  {
+    advanced: true,
+  }
+);
 
-    const filteredRowOptions = computed(() => {
-      // We don't want the user to pick more options per page than there are items in total
-      let filteredRowOptions = data.rowOptions.filter((option, index) => {
-        return (
-          (option > props.pagination.total &&
-            data.rowOptions[index - 1] < props.pagination.total) ||
-          option < props.pagination.total
-        );
-      });
-
-      return filteredRowOptions;
-    });
-
-    const moreThanOnePage = computed(() => {
-      // Determine if there are more items than the lowest possible option for items per row
-      return props.pagination.total > data.rowOptions[0];
-    });
-
-    const pageNumbers = computed(() => {
-      let pageNumbers = {
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-        6: 6,
-        7: 7,
-      } as PageNumber;
-
-      let currentPage = props.pagination.current_page;
-      let lastPage = props.pagination.last_page;
-
-      // Deviate from sequential numbering if 8 pages or more
-      if (lastPage >= 8) {
-        // Always print last page number
-        pageNumbers[7] = lastPage;
-
-        switch (true) {
-          // Changes when current page is 1-3
-          case currentPage < 4:
-            pageNumbers[5] = "...";
-            pageNumbers[6] = lastPage - 1;
-            break;
-
-          // Changes when current page is 4
-          case currentPage === 4:
-            pageNumbers[6] = "...";
-            break;
-
-          // Changes when current page is between 5 and final 4 pages
-          case currentPage > 4 && currentPage < lastPage - 3:
-            pageNumbers[2] = "...";
-            pageNumbers[3] = currentPage - 1;
-            pageNumbers[4] = currentPage;
-            pageNumbers[5] = currentPage + 1;
-            pageNumbers[6] = "...";
-            break;
-
-          // Changes when current page is one of final 4 pages
-          case currentPage >= lastPage - 3:
-            pageNumbers[2] = "...";
-            pageNumbers[3] = props.pagination.last_page - 4;
-            pageNumbers[4] = props.pagination.last_page - 3;
-            pageNumbers[5] = props.pagination.last_page - 2;
-            pageNumbers[6] = props.pagination.last_page - 1;
-            break;
-        }
-      }
-      return pageNumbers;
-    });
-
-    const prevPageUrl = computed(() => {
-      return props.pagination.prev_page_url ?? "";
-    });
-
-    const nextPageUrl = computed(() => {
-      return props.pagination.next_page_url ?? "";
-    });
-
-    const adjustRowsPerPage = () => {
-      {
-        state.tablePerPageOption = data.perPage;
-
-        const params = new URLSearchParams(location.search);
-        /**
-         * We need to clear the page query param, otherwise the table view will sometmies break if the user changes rows per page while viewing a
-         * page other than 1
-         */
-
-        params.delete("page");
-        params.set("perPage", `${data.perPage}`);
-
-        Inertia.visit(`${location.pathname}?${params}`);
-      }
-    };
-
-    const pageUrl = (page: number) => {
-      // We set the page query param in this manner so it doesn't overwrite the perPage param.
-      const params = new URLSearchParams(location.search);
-      params.set("page", `${pageNumbers.value[page]}`);
-
-      return `${location.pathname}?${params}`;
-    };
-
-    const validatePageInput = () => {
-      if (
-        data.pageInput > props.pagination.last_page ||
-        typeof data.pageInput !== "number"
-      ) {
-        data.inputIsValid = false;
-        return "#";
-      } else {
-        return `${props.pagination.path}?page=${data.pageInput}`;
-      }
-    };
-
-    const userAlert = () => {
-      if (!data.inputIsValid) {
-        alert(
-          `Please choose a page number between one and ${props.pagination.last_page}`
-        );
-      }
-    };
-
-    return {
-      adjustRowsPerPage,
-      filteredRowOptions,
-      moreThanOnePage,
-      pageNumbers,
-      pageUrl,
-      prevPageUrl,
-      nextPageUrl,
-      validatePageInput,
-      userAlert,
-      ...toRefs(data),
-      ...toRefs(state),
-    };
-  },
+const data = reactive({
+  inputIsValid: true,
+  pageInput: props.pagination.current_page,
+  perPage: props.pagination.per_page,
+  rowOptions: [10, 25, 50, 100],
 });
+
+const { tablePerPageOption } = toRefs(state);
+const { pageInput } = toRefs(data);
+
+const filteredRowOptions = computed(() => {
+  // We don't want the user to pick more options per page than there are items in total
+  let filteredRowOptions = data.rowOptions.filter((option, index) => {
+    return (
+      (option > props.pagination.total &&
+        data.rowOptions[index - 1] < props.pagination.total) ||
+      option < props.pagination.total
+    );
+  });
+
+  return filteredRowOptions;
+});
+
+const moreThanOnePage = computed(() => {
+  // Determine if there are more items than the lowest possible option for items per row
+  return props.pagination.total > data.rowOptions[0];
+});
+
+const pageNumbers = computed(() => {
+  let pageNumbers = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+  } as PageNumber;
+
+  let currentPage = props.pagination.current_page;
+  let lastPage = props.pagination.last_page;
+
+  // Deviate from sequential numbering if 8 pages or more
+  if (lastPage >= 8) {
+    // Always print last page number
+    pageNumbers[7] = lastPage;
+
+    switch (true) {
+      // Changes when current page is 1-3
+      case currentPage < 4:
+        pageNumbers[5] = "...";
+        pageNumbers[6] = lastPage - 1;
+        break;
+
+      // Changes when current page is 4
+      case currentPage === 4:
+        pageNumbers[6] = "...";
+        break;
+
+      // Changes when current page is between 5 and final 4 pages
+      case currentPage > 4 && currentPage < lastPage - 3:
+        pageNumbers[2] = "...";
+        pageNumbers[3] = currentPage - 1;
+        pageNumbers[4] = currentPage;
+        pageNumbers[5] = currentPage + 1;
+        pageNumbers[6] = "...";
+        break;
+
+      // Changes when current page is one of final 4 pages
+      case currentPage >= lastPage - 3:
+        pageNumbers[2] = "...";
+        pageNumbers[3] = props.pagination.last_page - 4;
+        pageNumbers[4] = props.pagination.last_page - 3;
+        pageNumbers[5] = props.pagination.last_page - 2;
+        pageNumbers[6] = props.pagination.last_page - 1;
+        break;
+    }
+  }
+  return pageNumbers;
+});
+
+const prevPageUrl = computed(() => {
+  return props.pagination.prev_page_url ?? "";
+});
+
+const nextPageUrl = computed(() => {
+  return props.pagination.next_page_url ?? "";
+});
+
+const adjustRowsPerPage = () => {
+  {
+    state.tablePerPageOption = data.perPage;
+
+    const params = new URLSearchParams(location.search);
+    /**
+     * We need to clear the page query param, otherwise the table view will sometmies break if the user changes rows per page while viewing a
+     * page other than 1
+     */
+
+    params.delete("page");
+    params.set("perPage", `${data.perPage}`);
+
+    // Inertia.visit(`${location.pathname}?${params}`);
+  }
+};
+
+const pageUrl = (page: number) => {
+  // We set the page query param in this manner so it doesn't overwrite the perPage param.
+  const params = new URLSearchParams(location.search);
+  params.set("page", `${pageNumbers.value[page]}`);
+
+  return `${location.pathname}?${params}`;
+};
+
+const validatePageInput = () => {
+  if (
+    data.pageInput > props.pagination.last_page ||
+    typeof data.pageInput !== "number"
+  ) {
+    data.inputIsValid = false;
+    return "#";
+  } else {
+    return `${props.pagination.path}?page=${data.pageInput}`;
+  }
+};
+
+const userAlert = () => {
+  if (!data.inputIsValid) {
+    alert(
+      `Please choose a page number between one and ${props.pagination.last_page}`
+    );
+  }
+};
 </script>

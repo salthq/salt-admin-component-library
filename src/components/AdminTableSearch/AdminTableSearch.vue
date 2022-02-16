@@ -3,9 +3,9 @@
     <input
       type="search"
       class="form-control h-10 px-5 w-64 rounded-md shadow"
-      @input="isTyping"
+      @input="isTyping = true"
       v-model.trim="searchString"
-      :placeholder="$t('global.action.search')"
+      placeholder="Search"
     />
   </div>
 </template>
@@ -13,19 +13,15 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from "vue";
 
-import debounce from "lodash";
-
 export default defineComponent({
   name: "SltAdminTableSearch",
   setup(_, { emit }) {
     const isTyping = ref(false);
     const searchString = ref("");
 
-    watch(searchString, () =>
-      debounce(function () {
-        isTyping.value = false;
-      })
-    );
+    watch(searchString, () => {
+      isTyping.value = false;
+    });
 
     const emitSearch = () => {
       emit("search", searchString.value);

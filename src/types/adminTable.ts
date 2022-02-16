@@ -3,7 +3,11 @@ export declare type Columns = {
   sort: string | null;
 };
 
-export declare type TableData = Array<Record<string, unknown>>;
+export interface TableDataItem {
+  [key: string]: any;
+}
+
+export declare type TableData = Array<TableDataItem>;
 
 export interface TablePagination {
   current_page: number;

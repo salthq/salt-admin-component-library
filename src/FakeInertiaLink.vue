@@ -1,7 +1,7 @@
 <template>
-  <Link v-bind="props" @click="$emit('click')" :as="inertiaAs">
+  <a v-bind="props" @click="$emit('click')" :as="inertiaAs">
     <slot></slot>
-  </Link>
+  </a>
 </template>
 
 <script setup lang="ts">

@@ -17,50 +17,31 @@
   </tr>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 
 import state from "../../state/adminTableState";
 
-export default defineComponent({
-  name: "SltAdminTableRow",
-  props: {
-    index: {
-      type: Number,
-      required: true,
-    },
-    value: {
-      type: Number,
-      required: true,
-    },
-    hasSelect: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup(props) {
-    const bgClass = computed(() => ({
-      "bg-white": props.index % 2 === 0,
-      "bg-gray-50": props.index % 2 !== 0,
-    }));
+const props = defineProps<{
+  hasSelect?: boolean;
+  index: number;
+  value: number;
+}>();
 
-    const isChecked = computed(() => {
-      return state.selectedRows.includes(props.value);
-    });
+const bgClass = computed(() => ({
+  "bg-white": props.index % 2 === 0,
+  "bg-gray-50": props.index % 2 !== 0,
+}));
 
-    const toggleChecked = () => {
-      if (!state.selectedRows.includes(props.value)) {
-        state.selectedRows.push(props.value);
-      } else {
-        state.selectedRows.filter((item) => item != props.value);
-      }
-    };
-
-    return {
-      bgClass,
-      isChecked,
-      toggleChecked,
-    };
-  },
+const isChecked = computed(() => {
+  return state.selectedRows.includes(props.value);
 });
+
+const toggleChecked = () => {
+  if (!state.selectedRows.includes(props.value)) {
+    state.selectedRows.push(props.value);
+  } else {
+    state.selectedRows.filter((item) => item != props.value);
+  }
+};
 </script>

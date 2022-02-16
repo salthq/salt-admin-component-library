@@ -9,7 +9,7 @@
         <input
           @click="setInputActive"
           ref="dropdowninput"
-          v-model.trim="inputValue"
+          v-model="inputValue"
           type="search"
           inputmode="search"
           :placeholder="placeholder"
@@ -42,7 +42,7 @@
       >
         <div @click="setInputActive">
           <div v-if="showSelection" class="flex justify-between">
-            <span data-test="selected-item-name">{{ selectedItem.name }}</span>
+            <span data-test="selected-item-name">{{ selectedItem?.name }}</span>
             <span
               data-test="reset-selection"
               class="cursor-pointer inline-block px-2 hover:text-red-600"

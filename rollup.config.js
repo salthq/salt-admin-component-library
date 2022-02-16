@@ -61,9 +61,7 @@ export default () => {
         node({
           extensions: [".vue", ".ts"],
         }),
-        typescript({
-          typescript: require("typescript"),
-        }),
+        typescript(),
         vue(vuePluginConfig),
         babel(babelOptions),
         cjs(),
