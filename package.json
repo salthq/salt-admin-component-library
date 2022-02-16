@@ -1,6 +1,6 @@
 {
   "name": "@pango-studio/salt-admin-component-library",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -43,7 +43,7 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-unit-mocha": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.15",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",

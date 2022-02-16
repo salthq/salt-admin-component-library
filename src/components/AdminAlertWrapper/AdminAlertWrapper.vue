@@ -1,3 +1,32 @@
+<script lang="ts">
+export default {
+  name: "SltAdminAlertWrapper",
+};
+</script>
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+type variationType = "success" | "warning" | "failure";
+
+withDefaults(
+  defineProps<{
+    dismissable?: boolean;
+    variation?: variationType;
+  }>(),
+  {
+    dismissable: false,
+    variation: "success",
+  }
+);
+
+const visible = ref(true);
+
+const closeAlert = () => {
+  visible.value = false;
+};
+</script>
+
 <template>
   <div
     v-if="visible"
@@ -82,26 +111,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from "vue";
-
-type variationType = "success" | "warning" | "failure";
-
-withDefaults(
-  defineProps<{
-    dismissable?: boolean;
-    variation?: variationType;
-  }>(),
-  {
-    dismissable: false,
-    variation: "success",
-  }
-);
-
-const visible = ref(true);
-
-const closeAlert = () => {
-  visible.value = false;
-};
-</script>
