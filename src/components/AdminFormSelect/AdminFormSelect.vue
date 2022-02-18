@@ -1,23 +1,14 @@
-<template>
-  <admin-form-item-wrapper :inputId="inputId" :label="label" :info="info">
-    <admin-dropdown-list
-      :existing-selection="existingSelection ?? undefined"
-      item-identifier="value"
-      item-label="label"
-      :item-list="options"
-      @on-item-select="emitInput"
-      @on-item-reset="emitReset"
-      :show-button="showButton"
-      :value="inputValue"
-    />
-  </admin-form-item-wrapper>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminFormSelect",
+};
+</script>
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 
 import AdminDropdownList from "../../components/AdminDropdownList/AdminDropdownList.vue";
-import AdminFormItemWrapper from "../../components/AdminFormItemWrapper.vue";
+import AdminFormItemWrapper from "../AdminFormItemWrapper/AdminFormItemWrapper.vue";
 
 import { DropdownListItem } from "../../types/adminDropdownList";
 
@@ -79,3 +70,18 @@ const emitInput = (event: DropdownListItem | null) => {
   emit("selected", event);
 };
 </script>
+
+<template>
+  <admin-form-item-wrapper :inputId="inputId" :label="label" :info="info">
+    <admin-dropdown-list
+      :existing-selection="existingSelection ?? undefined"
+      item-identifier="value"
+      item-label="label"
+      :item-list="options"
+      @on-item-select="emitInput"
+      @on-item-reset="emitReset"
+      :show-button="showButton"
+      :value="inputValue"
+    />
+  </admin-form-item-wrapper>
+</template>

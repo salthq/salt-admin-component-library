@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: "SltIconTick",
+};
+</script>
+
 <template>
   <icon-wrapper v-bind="props">
     <g>

@@ -1,3 +1,22 @@
+<script lang="ts">
+export default {
+  name: "SltAdminBreadcrumbs",
+};
+</script>
+
+<script setup lang="ts">
+import AppInertiaLink from "../AppInertiaLink.vue";
+
+interface Breadcrumb {
+  url: string;
+  title: string;
+}
+
+defineProps<{
+  breadcrumbs: Array<Breadcrumb>;
+}>();
+</script>
+
 <template>
   <div>
     <ul class="flex text-gray-500 text-sm mb-1">
@@ -30,22 +49,3 @@
     </ul>
   </div>
 </template>
-
-<script setup lang="ts">
-import AppInertiaLink from "../AppInertiaLink.vue";
-
-interface Breadcrumb {
-  url: string;
-  title: string;
-}
-
-defineProps<{
-  breadcrumbs: Array<Breadcrumb>;
-}>();
-</script>
-
-<script lang="ts">
-export default {
-  name: "SltAdminBreadcrumbs",
-};
-</script>

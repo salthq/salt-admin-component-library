@@ -1,3 +1,21 @@
+<script lang="ts">
+export default {
+  name: "SltAdminFormHeading",
+};
+</script>
+
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    text: string;
+    title: string;
+  }>(),
+  {
+    text: "",
+  }
+);
+</script>
+
 <template>
   <div class="pr-6">
     <h3
@@ -14,15 +32,3 @@
     </p>
   </div>
 </template>
-
-<script setup lang="ts">
-withDefaults(
-  defineProps<{
-    text: string;
-    title: string;
-  }>(),
-  {
-    text: "",
-  }
-);
-</script>

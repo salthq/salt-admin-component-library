@@ -1,3 +1,12 @@
+<script setup lang="ts">
+defineProps<{
+  inputId: string;
+  label?: string;
+  info?: string;
+  required?: boolean;
+}>();
+</script>
+
 <template>
   <div class="max-w-4xl flex flex-col" :class="{ 'pt-4': label }">
     <label
@@ -17,12 +26,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  inputId: string;
-  label?: string;
-  info?: string;
-  required?: boolean;
-}>();
-</script>

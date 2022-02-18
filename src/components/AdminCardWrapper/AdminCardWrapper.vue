@@ -1,3 +1,26 @@
+<script lang="ts">
+export default {
+  name: "SltAdminCardWrapper",
+};
+</script>
+
+<script setup lang="ts">
+import { computed } from "vue";
+
+const props = withDefaults(
+  defineProps<{
+    hasPadding?: boolean;
+  }>(),
+  {
+    hasPadding: true,
+  }
+);
+
+const paddingClasses = computed(() => ({
+  "py-6 px-4 sm:px-6 lg:px-8": props.hasPadding,
+}));
+</script>
+
 <template>
   <div class="bg-white rounded-lg shadow">
     <div
@@ -19,20 +42,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-
-const props = withDefaults(
-  defineProps<{
-    hasPadding?: boolean;
-  }>(),
-  {
-    hasPadding: true,
-  }
-);
-
-const paddingClasses = computed(() => ({
-  "py-6 px-4 sm:px-6 lg:px-8": props.hasPadding,
-}));
-</script>

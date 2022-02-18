@@ -1,60 +1,8 @@
-<template>
-  <div class="flex flex-col">
-    <slot name="customActions"></slot>
-
-    <div
-      class="-my-2 pt-2 pb-24 lg:pb-8 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
-    >
-      <div
-        class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
-      >
-        <table class="min-w-full">
-          <slot name="header">
-            <thead>
-              <tr>
-                <admin-table-header
-                  v-if="hasSelect"
-                  class="hover:bg-gray-50 cursor-pointer w-6"
-                  @click="toggleSelectAll"
-                >
-                  <div class="flex items-center justify-center">
-                    <input
-                      type="checkbox"
-                      class="border form-checkbox cursor-pointer h-4 w-4 text-primary-700 transition duration-150 ease-in-out"
-                      :checked="allRowsSelected"
-                    />
-                  </div>
-                </admin-table-header>
-                <admin-table-header
-                  v-for="column in columns"
-                  :key="column.label"
-                  @click="column.sort ? searchOrSort(null, column.sort) : ''"
-                  :label="column.label"
-                  :sort="column.sort ?? undefined"
-                />
-              </tr>
-            </thead>
-          </slot>
-          <tbody v-if="!emptyTable && !loading">
-            <slot name="rows"> </slot>
-          </tbody>
-          <tbody class="p-6 flex justify-center" v-if="loading">
-            <span>
-              <icon-loading />
-            </span>
-          </tbody>
-        </table>
-        <div v-if="emptyTable">
-          <slot name="empty"> </slot>
-        </div>
-        <admin-table-pagination
-          v-if="hasPagination && tablePagination?.total"
-          :pagination="tablePagination"
-        />
-      </div>
-    </div>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminTable",
+};
+</script>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, toRefs } from "vue";
@@ -184,3 +132,61 @@ onMounted(() => {
   state.selectedRows = [];
 });
 </script>
+
+<template>
+  <div class="flex flex-col">
+    <slot name="customActions"></slot>
+
+    <div
+      class="-my-2 pt-2 pb-24 lg:pb-8 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+    >
+      <div
+        class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+      >
+        <table class="min-w-full">
+          <slot name="header">
+            <thead>
+              <tr>
+                <admin-table-header
+                  v-if="hasSelect"
+                  class="hover:bg-gray-50 cursor-pointer w-6"
+                  @click="toggleSelectAll"
+                >
+                  <div class="flex items-center justify-center">
+                    <input
+                      type="checkbox"
+                      class="border form-checkbox cursor-pointer h-4 w-4 text-primary-700 transition duration-150 ease-in-out"
+                      :checked="allRowsSelected"
+                    />
+                  </div>
+                </admin-table-header>
+                <admin-table-header
+                  v-for="column in columns"
+                  :key="column.label"
+                  @click="column.sort ? searchOrSort(null, column.sort) : ''"
+                  :label="column.label"
+                  :sort="column.sort ?? undefined"
+                />
+              </tr>
+            </thead>
+          </slot>
+          <tbody v-if="!emptyTable && !loading">
+            <slot name="rows"> </slot>
+          </tbody>
+          <tbody class="p-6 flex justify-center" v-if="loading">
+            <span>
+              <icon-loading />
+            </span>
+          </tbody>
+        </table>
+        <div v-if="emptyTable">
+          <slot name="empty"> </slot>
+        </div>
+        <admin-table-pagination
+          v-if="hasPagination && tablePagination?.total"
+          :pagination="tablePagination"
+        />
+      </div>
+    </div>
+  </div>
+</template>

@@ -7,6 +7,7 @@ import AdminCopyBadge from "./AdminCopyBadge";
 import AdminDropdownList from "./AdminDropdownList";
 import AdminFormHeading from "./AdminFormHeading";
 import AdminFormInput from "./AdminFormInput";
+import AdminFormItemWrapper from "./AdminFormItemWrapper";
 import AdminFormSelect from "./AdminFormSelect";
 import AdminFormTextArea from "./AdminFormTextArea";
 import AdminFormToggle from "./AdminFormToggle";
@@ -30,6 +31,7 @@ export {
   AdminDropdownList,
   AdminFormHeading,
   AdminFormInput,
+  AdminFormItemWrapper,
   AdminFormSelect,
   AdminFormTextArea,
   AdminFormToggle,

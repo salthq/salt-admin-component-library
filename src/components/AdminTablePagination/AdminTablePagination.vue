@@ -1,156 +1,8 @@
-<template>
-  <div
-    class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-  >
-    <div class="flex-1 flex items-center justify-between flex-wrap">
-      <!-- Rows per page selector -->
-      <div
-        v-if="moreThanOnePage"
-        class="flex justify-between items-center text-gray-700"
-      >
-        <span class="mr-2">Rows per page: </span>
-        <select
-          class="bg-white"
-          name="Rows per page"
-          id="rows_per_page"
-          @change="adjustRowsPerPage"
-        >
-          <option
-            :key="option"
-            v-for="option in filteredRowOptions"
-            :value="option"
-            :selected="option === tablePerPageOption"
-          >
-            {{ option }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Current page indicator -->
-      <div>
-        <p class="text-sm leading-5 text-gray-700">
-          Showing {{ pagination.from }} to {{ pagination.to }} of
-          {{ pagination.total }} results
-        </p>
-      </div>
-
-      <!-- Pagination navigation -->
-      <div v-if="pagination.last_page > 1">
-        <!-- Simple pagination -->
-        <nav class="relative z-0 inline-flex shadow-sm" v-if="!advanced">
-          <app-inertia-link
-            preserve-scroll
-            :href="prevPageUrl"
-            tag="button"
-            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
-            v-bind:class="{
-              'opacity-50 text-gray-300 cursor-default':
-                !pagination.prev_page_url,
-            }"
-            aria-label="previous"
-            title="Previous"
-          >
-            <icon-arrow-prev fill="grey-darkest" />
-          </app-inertia-link>
-          <app-inertia-link
-            preserve-scroll
-            :href="nextPageUrl"
-            tag="button"
-            class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
-            v-bind:class="{
-              'opacity-50 text-gray-300 cursor-default':
-                !pagination.next_page_url,
-            }"
-            aria-label="next"
-            title="Next"
-          >
-            <icon-arrow-next fill="grey-darkest" />
-          </app-inertia-link>
-        </nav>
-
-        <!-- Advanced Pagination -->
-        <nav class="relative z-0 inline-flex mt-2 lg:mt-0" v-if="advanced">
-          <!-- Back button -->
-          <app-inertia-link
-            preserve-scroll
-            :href="prevPageUrl"
-            tag="button"
-            class="shadow-sm relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
-            v-bind:class="{
-              'opacity-50 text-gray-300 cursor-default':
-                !pagination.prev_page_url,
-            }"
-            aria-label="Next"
-            title="Previous"
-          >
-            <icon-arrow-prev fill="grey-darkest" />
-          </app-inertia-link>
-          <!-- Page number buttons -->
-          <app-inertia-link
-            preserve-scroll
-            :href="pageUrl(page)"
-            tag="button"
-            class="-ml-px shadow-sm relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 transition ease-in-out duration-150"
-            :class="[
-              {
-                'cursor-default font-bold bg-primary-100':
-                  pageNumbers[page] === pagination.current_page,
-              },
-              {
-                'text-gray-300 cursor-default': pageNumbers[page] === '...',
-              },
-            ]"
-            v-for="page in Math.min(pagination.last_page, 7)"
-            v-bind:key="page"
-          >
-            {{ pageNumbers[page] }}
-          </app-inertia-link>
-
-          <!-- Next button -->
-          <app-inertia-link
-            preserve-scroll
-            :href="nextPageUrl"
-            tag="button"
-            class="shadow-sm -ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
-            v-bind:class="{
-              'opacity-50 text-gray-300 cursor-default':
-                !pagination.next_page_url,
-            }"
-            aria-label="Next"
-            title="Next"
-          >
-            <icon-arrow-next fill="grey-darkest" />
-          </app-inertia-link>
-
-          <!-- User page input -->
-          <div>
-            <input
-              type="number"
-              name="page-number"
-              id="page-number"
-              :placeholder="`${pagination.current_page}`"
-              class="text-gray-500 focus:text-black shadow-sm relative inline-flex w-12 ml-6 border border-gray-300 px-2 py-2 rounded-md text-sm leading-5"
-              v-model="pageInput"
-              min="1"
-              :max="`${pagination.last_page}`"
-            />
-            <app-inertia-link
-              preserve-scroll
-              :href="validatePageInput()"
-              tag="button"
-              class="shadow-sm relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm leading-5 font-medium transition ease-in-out duration-150"
-              aria-label="$t('nav.pagination.next')"
-              title="$t('nav.pagination.next')"
-              v-on:click="userAlert()"
-            >
-              Go
-            </app-inertia-link>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminTablePagination",
+};
+</script>
 
 <script setup lang="ts">
 import { computed, reactive, toRefs } from "vue";
@@ -311,3 +163,157 @@ const userAlert = () => {
   }
 };
 </script>
+
+<template>
+  <div
+    class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+  >
+    <div class="flex-1 flex items-center justify-between flex-wrap">
+      <!-- Rows per page selector -->
+      <div
+        v-if="moreThanOnePage"
+        class="flex justify-between items-center text-gray-700"
+      >
+        <span class="mr-2">Rows per page: </span>
+        <select
+          class="bg-white"
+          name="Rows per page"
+          id="rows_per_page"
+          @change="adjustRowsPerPage"
+        >
+          <option
+            :key="option"
+            v-for="option in filteredRowOptions"
+            :value="option"
+            :selected="option === tablePerPageOption"
+          >
+            {{ option }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Current page indicator -->
+      <div>
+        <p class="text-sm leading-5 text-gray-700">
+          Showing {{ pagination.from }} to {{ pagination.to }} of
+          {{ pagination.total }} results
+        </p>
+      </div>
+
+      <!-- Pagination navigation -->
+      <div v-if="pagination.last_page > 1">
+        <!-- Simple pagination -->
+        <nav class="relative z-0 inline-flex shadow-sm" v-if="!advanced">
+          <app-inertia-link
+            preserve-scroll
+            :href="prevPageUrl"
+            tag="button"
+            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
+            v-bind:class="{
+              'opacity-50 text-gray-300 cursor-default':
+                !pagination.prev_page_url,
+            }"
+            aria-label="previous"
+            title="Previous"
+          >
+            <icon-arrow-prev fill="grey-darkest" />
+          </app-inertia-link>
+          <app-inertia-link
+            preserve-scroll
+            :href="nextPageUrl"
+            tag="button"
+            class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
+            v-bind:class="{
+              'opacity-50 text-gray-300 cursor-default':
+                !pagination.next_page_url,
+            }"
+            aria-label="next"
+            title="Next"
+          >
+            <icon-arrow-next fill="grey-darkest" />
+          </app-inertia-link>
+        </nav>
+
+        <!-- Advanced Pagination -->
+        <nav class="relative z-0 inline-flex mt-2 lg:mt-0" v-if="advanced">
+          <!-- Back button -->
+          <app-inertia-link
+            preserve-scroll
+            :href="prevPageUrl"
+            tag="button"
+            class="shadow-sm relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
+            v-bind:class="{
+              'opacity-50 text-gray-300 cursor-default':
+                !pagination.prev_page_url,
+            }"
+            aria-label="Next"
+            title="Previous"
+          >
+            <icon-arrow-prev fill="grey-darkest" />
+          </app-inertia-link>
+          <!-- Page number buttons -->
+          <app-inertia-link
+            preserve-scroll
+            :href="pageUrl(page)"
+            tag="button"
+            class="-ml-px shadow-sm relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 transition ease-in-out duration-150"
+            :class="[
+              {
+                'cursor-default font-bold bg-primary-100':
+                  pageNumbers[page] === pagination.current_page,
+              },
+              {
+                'text-gray-300 cursor-default': pageNumbers[page] === '...',
+              },
+            ]"
+            v-for="page in Math.min(pagination.last_page, 7)"
+            v-bind:key="page"
+          >
+            {{ pageNumbers[page] }}
+          </app-inertia-link>
+
+          <!-- Next button -->
+          <app-inertia-link
+            preserve-scroll
+            :href="nextPageUrl"
+            tag="button"
+            class="shadow-sm -ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 transition ease-in-out duration-150"
+            v-bind:class="{
+              'opacity-50 text-gray-300 cursor-default':
+                !pagination.next_page_url,
+            }"
+            aria-label="Next"
+            title="Next"
+          >
+            <icon-arrow-next fill="grey-darkest" />
+          </app-inertia-link>
+
+          <!-- User page input -->
+          <div>
+            <input
+              type="number"
+              name="page-number"
+              id="page-number"
+              :placeholder="`${pagination.current_page}`"
+              class="text-gray-500 focus:text-black shadow-sm relative inline-flex w-12 ml-6 border border-gray-300 px-2 py-2 rounded-md text-sm leading-5"
+              v-model="pageInput"
+              min="1"
+              :max="`${pagination.last_page}`"
+            />
+            <app-inertia-link
+              preserve-scroll
+              :href="validatePageInput()"
+              tag="button"
+              class="shadow-sm relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm leading-5 font-medium transition ease-in-out duration-150"
+              aria-label="$t('nav.pagination.next')"
+              title="$t('nav.pagination.next')"
+              v-on:click="userAlert()"
+            >
+              Go
+            </app-inertia-link>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</template>

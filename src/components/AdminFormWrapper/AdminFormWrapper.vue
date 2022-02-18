@@ -1,3 +1,33 @@
+<script lang="ts">
+export default {
+  name: "SltAdminFormWrapper",
+};
+</script>
+
+<script setup lang="ts">
+import AdminButton from "../AdminButton/AdminButton.vue";
+
+const emit = defineEmits<{
+  (e: "submit", event: Event): void;
+}>();
+
+withDefaults(
+  defineProps<{
+    button: string;
+    changed: boolean;
+    loading: boolean;
+  }>(),
+  {
+    button: "Save",
+    loading: false,
+  }
+);
+
+const submit = (event: Event) => {
+  emit("submit", event);
+};
+</script>
+
 <template>
   <form
     class="bg-white shadow container mx-auto sm:rounded-md"
@@ -30,27 +60,3 @@
     </div>
   </form>
 </template>
-
-<script setup lang="ts">
-import AdminButton from "../AdminButton/AdminButton.vue";
-
-const emit = defineEmits<{
-  (e: "submit", event: Event): void;
-}>();
-
-withDefaults(
-  defineProps<{
-    button: string;
-    changed: boolean;
-    loading: boolean;
-  }>(),
-  {
-    button: "Save",
-    loading: false,
-  }
-);
-
-const submit = (event: Event) => {
-  emit("submit", event);
-};
-</script>

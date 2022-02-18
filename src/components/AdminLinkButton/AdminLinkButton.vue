@@ -1,10 +1,8 @@
-<template>
-  <span class="self-start rounded-md shadow-sm">
-    <app-inertia-link :class="classes" :href="link">
-      {{ text }}
-    </app-inertia-link>
-  </span>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminLinkButton",
+};
+</script>
 
 <script setup lang="ts">
 import { computed } from "vue";
@@ -43,3 +41,11 @@ const classes = computed(() => {
   );
 });
 </script>
+
+<template>
+  <span class="self-start rounded-md shadow-sm">
+    <app-inertia-link :class="classes" :href="link">
+      {{ text }}
+    </app-inertia-link>
+  </span>
+</template>

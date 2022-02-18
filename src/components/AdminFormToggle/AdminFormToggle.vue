@@ -1,3 +1,38 @@
+<script lang="ts">
+export default {
+  name: "SltAdminFormToggle",
+};
+</script>
+
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+
+const emit = defineEmits<{
+  (event: "input", value: boolean): void;
+}>();
+
+const props = defineProps<{
+  inputId: string;
+  label: string;
+  info?: string;
+  readonly?: boolean;
+  value?: boolean;
+}>();
+
+const checked = ref(false);
+
+onMounted(() => {
+  checked.value = props.value ?? false;
+});
+
+const toggleChecked = () => {
+  if (!props.readonly) {
+    checked.value = !checked.value;
+    emit("input", checked.value);
+  }
+};
+</script>
+
 <template>
   <div :id="inputId" class="relative flex items-start py-4">
     <div class="absolute flex items-center">
@@ -68,32 +103,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { onMounted, ref } from "vue";
-
-const emit = defineEmits<{
-  (event: "input", value: boolean): void;
-}>();
-
-const props = defineProps<{
-  inputId: string;
-  label: string;
-  info?: string;
-  readonly?: boolean;
-  value?: boolean;
-}>();
-
-const checked = ref(false);
-
-onMounted(() => {
-  checked.value = props.value ?? false;
-});
-
-const toggleChecked = () => {
-  if (!props.readonly) {
-    checked.value = !checked.value;
-    emit("input", checked.value);
-  }
-};
-</script>

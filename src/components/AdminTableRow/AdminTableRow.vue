@@ -1,21 +1,8 @@
-<template>
-  <tr :class="bgClass">
-    <td
-      v-if="hasSelect"
-      class="hover:bg-gray-50 cursor-pointer"
-      @click="toggleChecked"
-    >
-      <div class="flex items-center justify-center">
-        <input
-          type="checkbox"
-          class="border form-checkbox cursor-pointer h-4 w-4 text-primary-700 transition duration-150 ease-in-out"
-          :checked="isChecked"
-        />
-      </div>
-    </td>
-    <slot />
-  </tr>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminTableRow",
+};
+</script>
 
 <script setup lang="ts">
 import { computed } from "vue";
@@ -45,3 +32,22 @@ const toggleChecked = () => {
   }
 };
 </script>
+
+<template>
+  <tr :class="bgClass">
+    <td
+      v-if="hasSelect"
+      class="hover:bg-gray-50 cursor-pointer"
+      @click="toggleChecked"
+    >
+      <div class="flex items-center justify-center">
+        <input
+          type="checkbox"
+          class="border form-checkbox cursor-pointer h-4 w-4 text-primary-700 transition duration-150 ease-in-out"
+          :checked="isChecked"
+        />
+      </div>
+    </td>
+    <slot />
+  </tr>
+</template>

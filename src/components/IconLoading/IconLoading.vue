@@ -1,3 +1,28 @@
+<script lang="ts">
+export default {
+  name: "SltIconLoading",
+};
+</script>
+
+<script setup lang="ts">
+import IconWrapper from "../IconWrapper.vue";
+
+const props = withDefaults(
+  defineProps<{
+    fill?: string;
+    size?: number;
+    strokeWidth?: number;
+    viewBox?: string;
+  }>(),
+  {
+    fill: "currentColor",
+    size: 20,
+    strokeWidth: 0,
+    viewBox: "0 0 120 30",
+  }
+);
+</script>
+
 <template>
   <icon-wrapper v-bind="props">
     <g>
@@ -70,22 +95,3 @@
     </g>
   </icon-wrapper>
 </template>
-
-<script setup lang="ts">
-import IconWrapper from "../IconWrapper.vue";
-
-const props = withDefaults(
-  defineProps<{
-    fill?: string;
-    size?: number;
-    strokeWidth?: number;
-    viewBox?: string;
-  }>(),
-  {
-    fill: "currentColor",
-    size: 20,
-    strokeWidth: 0,
-    viewBox: "0 0 120 30",
-  }
-);
-</script>

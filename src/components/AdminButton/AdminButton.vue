@@ -1,24 +1,8 @@
-<template>
-  <span class="inline-block rounded-md">
-    <button
-      :type="type"
-      class="inline-flex justify-center items-center py-2 px-4 border text-sm leading-5 font-medium rounded-md shadow-sm transition duration-150 ease-in-out"
-      :class="variationClasses"
-      :disabled="disabled"
-      @click="onClick"
-    >
-      <component class="mr-2" v-if="icon" :is="iconComponent" :size="24" />
-
-      <div v-if="loading">
-        <slot name="loadingPlaceholder">Loading...</slot>
-      </div>
-
-      <div class="flex items-center" v-else>
-        {{ label }}
-      </div>
-    </button>
-  </span>
-</template>
+<script lang="ts">
+export default {
+  name: "SltAdminButton",
+};
+</script>
 
 <script setup lang="ts">
 import { computed } from "vue";
@@ -79,3 +63,25 @@ const onClick = () => {
   emit("click");
 };
 </script>
+
+<template>
+  <span class="inline-block rounded-md">
+    <button
+      :type="type"
+      class="inline-flex justify-center items-center py-2 px-4 border text-sm leading-5 font-medium rounded-md shadow-sm transition duration-150 ease-in-out"
+      :class="variationClasses"
+      :disabled="disabled"
+      @click="onClick"
+    >
+      <component class="mr-2" v-if="icon" :is="iconComponent" :size="24" />
+
+      <div v-if="loading">
+        <slot name="loadingPlaceholder">Loading...</slot>
+      </div>
+
+      <div class="flex items-center" v-else>
+        {{ label }}
+      </div>
+    </button>
+  </span>
+</template>

@@ -1,3 +1,25 @@
+<script lang="ts">
+export default {
+  name: "SltAdminCopyBadge",
+};
+</script>
+
+<script setup lang="ts">
+import IconCopy from "../IconCopy/IconCopy.vue";
+
+defineProps<{
+  text: string;
+}>();
+
+const emit = defineEmits<{
+  (event: "copyText", text: string): void;
+}>();
+
+const emitCopy = (text: string) => {
+  emit("copyText", text);
+};
+</script>
+
 <template>
   <button
     type="button"
@@ -15,19 +37,3 @@
     <icon-copy />
   </button>
 </template>
-
-<script setup lang="ts">
-import IconCopy from "../IconCopy/IconCopy.vue";
-
-defineProps<{
-  text: string;
-}>();
-
-const emit = defineEmits<{
-  (event: "copyText", text: string): void;
-}>();
-
-const emitCopy = (text: string) => {
-  emit("copyText", text);
-};
-</script>
