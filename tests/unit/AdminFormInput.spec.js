@@ -4,7 +4,7 @@ import { assert } from "chai";
 import { nextTick } from "vue";
 
 import AdminFormInput from "@/components/AdminFormInput/AdminFormInput.vue";
-import AdminFormItemWrapper from "@/components/AdminFormItemWrapper.vue";
+import AdminFormItemWrapper from "@/components/AdminFormItemWrapper/AdminFormItemWrapper.vue";
 
 const label = "First Name";
 const inputId = "first_name";

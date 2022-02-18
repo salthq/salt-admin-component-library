@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import { assert } from "chai";
 
 import AdminFormTextArea from "@/components/AdminFormTextArea/AdminFormTextArea.vue";
-import AdminFormItemWrapper from "@/components/AdminFormItemWrapper.vue";
+import AdminFormItemWrapper from "@/components/AdminFormItemWrapper/AdminFormItemWrapper.vue";
 import { nextTick } from "vue";
 
 const label = "Text Area Test";
