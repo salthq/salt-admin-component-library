@@ -72,3 +72,13 @@ WithInfo.args = {
   label: "Name",
   type: "text",
 };
+
+export const WithError = Template.bind({});
+WithError.args = {
+  error: "Name has already been taken",
+  inputId: "example_input",
+  info: "Enter your first and last names",
+  label: "Name",
+  type: "text",
+  value: "John Doe",
+};

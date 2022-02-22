@@ -17,6 +17,7 @@ const emit = defineEmits<{
 
 const props = withDefaults(
   defineProps<{
+    error?: string;
     inputId: string;
     loading?: boolean;
     label?: string;
@@ -57,7 +58,9 @@ watch(inputValue, () => {
         :type="type"
         v-model="inputValue"
         class="block w-full shadow-sm appearance-none border rounded py-2 px-3 text-gray-700 sm:text-sm sm:leading-5 transition duration-150 ease-in-out"
+        :class="{ 'border-red-500': error }"
       />
+      <!-- Loading -->
       <span
         class="input-loading block w-full shadow-sm appearance-none border rounded py-2 px-3 text-gray-700 sm:text-sm sm:leading-5 transition duration-150 ease-in-out"
         v-if="loading"
@@ -65,5 +68,12 @@ watch(inputValue, () => {
         Loading...
       </span>
     </div>
+    <!-- Error -->
+    <span
+      v-if="error"
+      data-test="error"
+      class="block mt-1 text-sm text-red-600"
+      >{{ error }}</span
+    >
   </admin-form-item-wrapper>
 </template>

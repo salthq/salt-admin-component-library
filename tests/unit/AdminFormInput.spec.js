@@ -62,4 +62,16 @@ describe("AdminFormInput.vue", () => {
 
     assert.equal(wrapper.emitted().input[0].shift(), inputVal);
   });
+
+  it("displays an error message if an error is passed to the input", async () => {
+    const wrapper = mount(AdminFormInput, {
+      props: { label, inputId, value, error: "Error message" },
+      components: { AdminFormItemWrapper },
+    });
+
+    const error = wrapper.find("[data-test='error'");
+
+    assert.isTrue(error.exists());
+    assert.equal(error.text(), "Error message");
+  });
 });
