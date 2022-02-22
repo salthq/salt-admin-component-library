@@ -33,17 +33,17 @@ const submit = (event: Event) => {
     @submit.prevent="submit"
   >
     <div
-      v-if="!!$slots.header"
+      v-if="!!$slots.heading"
       class="mx-auto pt-12 pb-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200"
     >
-      <slot name="header"></slot>
+      <slot name="heading"></slot>
     </div>
     <div
-      v-if="!!$slots.content"
+      v-if="!!$slots.fields"
       class="mx-auto py-12 px-4 sm:px-6 lg:px-8"
-      :class="{ 'pt-6': $slots.header }"
+      :class="{ 'pt-6': $slots.heading }"
     >
-      <slot name="content"></slot>
+      <slot name="fields"></slot>
     </div>
 
     <div class="sm:px-6 lg:px-8 py-4 bg-gray-100 flex items-center justify-end">

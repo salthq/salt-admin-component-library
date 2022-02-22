@@ -7,39 +7,39 @@ export default {
   component: { SltAdminFormWrapper },
 };
 
-export const ContentOnly = (args) => ({
+export const FieldsOnly = (args) => ({
   components: { SltAdminFormWrapper },
   setup() {
     return { args };
   },
   template: `<slt-admin-form-wrapper v-bind="args">
-    <template #content>
+    <template #fields>
         {{args.content}}
     </template>
   </slt-admin-form-wrapper>`,
 });
 
-ContentOnly.args = {
+FieldsOnly.args = {
   content: "Form content",
 };
 
-export const WithHeader = (args) => ({
+export const WithHeading = (args) => ({
   components: { SltAdminFormWrapper, SltAdminFormHeading },
   setup() {
     return { args };
   },
   template: `<slt-admin-form-wrapper v-bind="args">
-    <template #header>
+    <template #heading>
       <slt-admin-form-heading :title="args.title" />
     </template>
-    <template #content>
+    <template #fields>
         {{args.content}}
     </template>
   </slt-admin-form-wrapper>`,
 });
 
-WithHeader.args = {
-  title: "Form header",
+WithHeading.args = {
+  title: "Form heading",
   content: "Form content",
 };
 
@@ -49,10 +49,10 @@ export const WithCustomActions = (args) => ({
     return { args };
   },
   template: `<slt-admin-form-wrapper v-bind="args">
-    <template #header>
+    <template #heading>
       <slt-admin-form-heading :title="args.title" />
     </template>
-    <template #content>
+    <template #fields>
         {{args.content}}
     </template>
     <template #actions>
@@ -70,6 +70,6 @@ export const WithCustomActions = (args) => ({
 });
 
 WithCustomActions.args = {
-  title: "Form header",
+  title: "Form heading",
   content: "Form content",
 };

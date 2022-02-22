@@ -5,21 +5,21 @@ import AdminFormWrapper from "@/components/AdminFormWrapper/AdminFormWrapper.vue
 
 const wrapper = mount(AdminFormWrapper, {
   slots: {
-    content: () => "<h1 id='content'>Content</h1>",
-    header: () => "<h1 id='header'>Header</h1>",
+    fields: () => "<h1 id='fields'>Fields</h1>",
+    heading: () => "<h1 id='heading'>Heading</h1>",
     actions: () => "<button id='actions'>Button</button>",
   },
 });
 
 describe("AdminFormWrapper.vue", () => {
-  it("displays content added in the content slot", () => {
-    const contentSlotContent = wrapper.find("#content");
+  it("displays anything added in the fields slot", () => {
+    const contentSlotContent = wrapper.find("#fields");
 
     assert.exists(contentSlotContent);
   });
 
   it("displays content added in the title slot", function () {
-    const titleSlotContent = wrapper.find("#header");
+    const titleSlotContent = wrapper.find("#heading");
 
     assert.exists(titleSlotContent);
   });

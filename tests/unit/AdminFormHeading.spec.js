@@ -14,7 +14,7 @@ const wrapper = mount(AdminFormHeading, {
   },
 });
 
-describe("AdminFormWrapper.vue", () => {
+describe("AdminFormHeading.vue", () => {
   it("displays the value of the title prop", () => {
     assert.equal(
       wrapper.find("[data-test='form-heading-title']").text(),
