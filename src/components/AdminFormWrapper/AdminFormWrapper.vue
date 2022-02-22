@@ -13,9 +13,8 @@ const emit = defineEmits<{
 
 withDefaults(
   defineProps<{
-    button: string;
-    changed: boolean;
-    loading: boolean;
+    button?: string;
+    loading?: boolean;
   }>(),
   {
     button: "Save",
