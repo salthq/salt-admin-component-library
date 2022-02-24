@@ -5,7 +5,7 @@ export declare type Columns = {
 
 export interface DropdownListItem {
   id: string | number;
-  name: "string";
+  name: string;
 }
 
 export interface TableDataItem {
