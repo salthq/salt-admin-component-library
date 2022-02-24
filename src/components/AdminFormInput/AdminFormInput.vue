@@ -12,7 +12,7 @@ import AdminFormItemWrapper from "../AdminFormItemWrapper/AdminFormItemWrapper.v
 type InputType = "date" | "email" | "number" | "text" | "tel" | "url";
 
 const emit = defineEmits<{
-  (event: "input", value: string): void;
+  (event: "input", value: string | number): void;
 }>();
 
 const props = withDefaults(
@@ -25,7 +25,7 @@ const props = withDefaults(
     readonly?: boolean;
     required?: boolean;
     type?: InputType;
-    value?: string;
+    value?: string | number;
   }>(),
   {
     type: "text",
