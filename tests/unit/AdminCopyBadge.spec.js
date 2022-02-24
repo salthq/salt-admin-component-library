@@ -40,6 +40,7 @@ describe("AdminCopyBadge.vue", () => {
     const copyButton = wrapper.find("button");
     copyButton.trigger("click");
 
-    assert.isOk(wrapper.emitted("copyText", text));
+    assert.exists(wrapper.emitted().copyText);
+    assert.equal(wrapper.emitted().copyText[0].shift(), text);
   });
 });

@@ -73,6 +73,6 @@ describe("AdminButton.vue", () => {
     const button = wrapper.find("button");
     button.trigger("click");
 
-    assert.isOk(wrapper.emitted("click"));
+    assert.exists(wrapper.emitted().click);
   });
 });

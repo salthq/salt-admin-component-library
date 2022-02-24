@@ -14,6 +14,7 @@ import AdminFormToggle from "./AdminFormToggle";
 import AdminFormWrapper from "./AdminFormWrapper";
 import AdminLinkButton from "./AdminLinkButton";
 import AdminRemoveBadge from "./AdminRemoveBadge";
+import AdminTabButton from "./AdminTabButton";
 import AdminTable from "./AdminTable";
 import AdminTableCell from "./AdminTableCell";
 import AdminTableHeader from "./AdminTableHeader";
@@ -38,6 +39,7 @@ export {
   AdminFormWrapper,
   AdminLinkButton,
   AdminRemoveBadge,
+  AdminTabButton,
   AdminTable,
   AdminTableCell,
   AdminTableHeader,
