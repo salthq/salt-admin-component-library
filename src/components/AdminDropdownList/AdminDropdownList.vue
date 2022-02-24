@@ -22,6 +22,7 @@ const emit = defineEmits<{
 
 const props = withDefaults(
   defineProps<{
+    error?: string;
     existingSelection?: DropdownListItem;
     itemList: Array<DropdownListItem>;
     placeholder?: string;
@@ -113,7 +114,11 @@ onMounted(() => {
           type="search"
           inputmode="search"
           :placeholder="placeholder"
-          class="w-full py-2 pl-3 border border-gray-300 rounded-md"
+          class="w-full py-2 pl-3 border rounded-md"
+          :class="{
+            'border-gray-300': !props.error,
+            'border-red-500': props.error,
+          }"
         />
         <span
           class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
@@ -138,7 +143,11 @@ onMounted(() => {
       <!-- Selected item display -->
       <div
         v-else
-        class="dropdown-selected w-full py-2 pl-3 border border-gray-300 rounded-md cursor-pointer"
+        class="dropdown-selected w-full py-2 pl-3 border rounded-md cursor-pointer"
+        :class="{
+          'border-gray-300': !props.error,
+          'border-red-500': props.error,
+        }"
       >
         <div @click="setInputActive">
           <div v-if="showSelection" class="flex justify-between">

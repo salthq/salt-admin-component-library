@@ -18,6 +18,7 @@ const emit = defineEmits<{
 }>();
 
 const props = defineProps<{
+  error?: string;
   info?: string;
   inputId: string;
   label: string;
@@ -82,6 +83,15 @@ const emitInput = (event: DropdownListItem | null) => {
       @on-item-reset="emitReset"
       :show-button="showButton"
       :value="inputValue"
+      :error="error"
     />
+
+    <!-- Error -->
+    <span
+      v-if="error"
+      data-test="error"
+      class="block mt-1 text-sm text-red-600"
+      >{{ error }}</span
+    >
   </admin-form-item-wrapper>
 </template>
