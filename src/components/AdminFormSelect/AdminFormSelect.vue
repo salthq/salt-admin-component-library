@@ -10,7 +10,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import AdminDropdownList from "../../components/AdminDropdownList/AdminDropdownList.vue";
 import AdminFormItemWrapper from "../AdminFormItemWrapper/AdminFormItemWrapper.vue";
 
-import { DropdownListItem } from "../../types/adminDropdownList";
+import { DropdownListItem } from "../../types";
 
 const emit = defineEmits<{
   (event: "input", item: DropdownListItem | null): void;

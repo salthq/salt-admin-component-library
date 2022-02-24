@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 
-import { DropdownListItem } from "../../types/adminDropdownList";
+import { DropdownListItem } from "../../types";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function searchWithFuse() {

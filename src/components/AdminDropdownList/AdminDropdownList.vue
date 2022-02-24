@@ -13,7 +13,13 @@ import IconRemove from "../../components/IconRemove/IconRemove.vue";
 import searchWithFuse from "../../composables/dropdown/searchWithFuse";
 
 // Types
-import { DropdownListItem } from "../../types/adminDropdownList";
+import { DropdownListItem } from "../../types";
+interface AdminDropdownListState {
+  inputActive: boolean;
+  inputValue: string;
+  selectedItem: DropdownListItem | null;
+  uniqueId: string;
+}
 
 const emit = defineEmits<{
   (event: "on-item-reset"): void;
@@ -33,13 +39,6 @@ const props = withDefaults(
     showSelection: true,
   }
 );
-
-interface AdminDropdownListState {
-  inputActive: boolean;
-  inputValue: string;
-  selectedItem: DropdownListItem | null;
-  uniqueId: string;
-}
 
 const state: AdminDropdownListState = reactive({
   inputActive: false,

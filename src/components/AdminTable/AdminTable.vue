@@ -9,7 +9,7 @@ import { computed, onMounted, reactive, toRefs } from "vue";
 
 import state from "../../state/adminTableState";
 
-import { Columns, TableData, TablePagination } from "../../types/adminTable";
+import { Columns, TableData, TablePagination } from "../../types";
 
 import AdminTableHeader from "../AdminTableHeader/AdminTableHeader.vue";
 import AdminTablePagination from "../AdminTablePagination/AdminTablePagination.vue";

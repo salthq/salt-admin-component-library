@@ -9,7 +9,7 @@ import { computed, reactive, toRefs } from "vue";
 // import { Inertia } from "@inertiajs/inertia";
 
 import state from "../../state/adminTableState";
-import { TablePagination } from "../../types/adminTable";
+import { TablePagination } from "../../types";
 
 import AppInertiaLink from "../AppInertiaLink.vue";
 import IconArrowNext from "../../components/IconArrowNext/IconArrowNext.vue";

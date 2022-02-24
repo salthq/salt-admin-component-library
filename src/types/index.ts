@@ -3,6 +3,11 @@ export declare type Columns = {
   sort: string | null;
 };
 
+export interface DropdownListItem {
+  id: string | number;
+  name: "string";
+}
+
 export interface TableDataItem {
   [key: string]: any;
 }
