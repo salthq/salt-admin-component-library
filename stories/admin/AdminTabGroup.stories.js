@@ -14,7 +14,7 @@ const Template = (args) => ({
     };
   },
   template: `<slt-admin-tab-group>
-    <slt-admin-tab-button label="Tab 1" tab="tab-1" />
+    <slt-admin-tab-button label="Tab 1" tab="tab-1"  />
     <slt-admin-tab-button label="Tab 2" tab="tab-2" />
   </slt-admin-tab-group>`,
 });
