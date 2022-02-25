@@ -1,6 +1,12 @@
 import { mount } from "@vue/test-utils";
 import { assert } from "chai";
 
+import { config } from "@vue/test-utils";
+
+import { Link } from "@inertiajs/inertia-vue3";
+config.global.stubs = {
+  Link,
+};
 import AdminLinkButton from "@/components/AdminLinkButton/AdminLinkButton.vue";
 
 const text = "Test text";
@@ -9,7 +15,7 @@ const url = "/admin/";
 describe("AdminLinkButton.vue", () => {
   it("displays the value of the text prop", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, url },
+      props: { text, link: url },
     });
 
     assert.include(wrapper.text(), text);
@@ -27,7 +33,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-primary' class when variation is primary", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, url, variation: "primary" },
+      props: { text, link: url, variation: "primary" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -37,7 +43,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-secondary' class when variation is secondary", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, url, variation: "secondary" },
+      props: { text, link: url, variation: "secondary" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -47,7 +53,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-white' class when variation is white", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, url, variation: "white" },
+      props: { text, link: url, variation: "white" },
     });
 
     const link = wrapper.find(".admin-link");
@@ -57,7 +63,7 @@ describe("AdminLinkButton.vue", () => {
 
   it("has the 'admin-link-danger' class when variation is danger", () => {
     const wrapper = mount(AdminLinkButton, {
-      props: { text, url, variation: "danger" },
+      props: { text, link: url, variation: "danger" },
     });
 
     const link = wrapper.find(".admin-link");

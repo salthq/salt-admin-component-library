@@ -2,12 +2,12 @@ import { shallowMount } from "@vue/test-utils";
 import { assert } from "chai";
 import AdminFormToggle from "@/components/AdminFormToggle/AdminFormToggle.vue";
 
-const inputID = "toggle_test";
+const inputId = "toggle_test";
 const label = "Toggle Label";
 const info = "Some text about toggling";
 
 const wrapper = shallowMount(AdminFormToggle, {
-  props: { inputID, label, info },
+  props: { inputId, label, info },
 });
 
 describe("AdminFormToggle.vue", () => {
