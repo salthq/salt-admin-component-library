@@ -1,3 +1,14 @@
+export declare type AllowedFileType =
+  | "jpg"
+  | "gif"
+  | "png"
+  | "jpeg"
+  | "pdf"
+  | "doc"
+  | "docx"
+  | "xls"
+  | "zip";
+
 export declare type Columns = {
   label: string;
   sort: string | null;
@@ -8,6 +19,10 @@ export interface DropdownListItem {
   name: string;
 }
 
+export interface FileUploadState {
+  file: File | null;
+  fileInput: HTMLInputElement | null;
+}
 export interface TableDataItem {
   [key: string]: any;
 }

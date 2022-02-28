@@ -11,7 +11,7 @@ const inputId = "first_name";
 const value = "first_name";
 
 describe("AdminFormInput.vue", () => {
-  it("sets the input name equal to the value of props.inputId", () => {
+  it("sets the input name equal to the value of props.name", () => {
     const wrapper = mount(AdminFormInput, {
       props: { label, inputId, value },
       components: { AdminFormItemWrapper },
@@ -63,7 +63,7 @@ describe("AdminFormInput.vue", () => {
     assert.equal(wrapper.emitted().input[0].shift(), inputVal);
   });
 
-  it("displays an error message if an error is passed to the input", async () => {
+  it("displays an error message if an error is passed as a prop", async () => {
     const wrapper = mount(AdminFormInput, {
       props: { label, inputId, value, error: "Error message" },
       components: { AdminFormItemWrapper },
