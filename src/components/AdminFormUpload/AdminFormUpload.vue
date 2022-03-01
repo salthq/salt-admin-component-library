@@ -5,14 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  defineEmits,
-  defineProps,
-  onMounted,
-  toRefs,
-  withDefaults,
-} from "vue";
+import { computed, onMounted, toRefs, withDefaults } from "vue";
 
 import state from "@/state/adminFormUploadState";
 import { calculateFileSize } from "@/composables/useFileSizeCalculator";
