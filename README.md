@@ -190,7 +190,13 @@ declare module "@vue/runtime-core" {
 
 ## Releasing a new version
 
-To release a new version, first login with your npm account details:
+Once you are ready to release a new version, you need to run the build steps to populate the `dist` folder with:
+
+```
+npm run build:vue
+```
+
+Once that process is completed, ensure you are logged in with your npm account details:
 
 ```
 npm login
