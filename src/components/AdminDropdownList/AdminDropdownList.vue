@@ -83,10 +83,10 @@ const selectItem = (item: DropdownListItem) => {
   }
 };
 
-const submitItem = (item: DropdownListItem) => {
+const submitItem = () => {
   state.inputActive = false;
   state.inputValue = "";
-  emit("on-item-select", item);
+  emit("on-item-select", state.selectedItem);
 };
 
 const setInputActive = () => {
@@ -211,7 +211,7 @@ onMounted(() => {
       v-if="showButton"
       label="Select"
       class="ml-4 whitespace-nowrap"
-      @clicked="selectedItem ? submitItem(selectedItem) : null"
+      @clicked="submitItem"
       :disabled="!selectedItem"
     />
   </div>
