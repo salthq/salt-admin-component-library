@@ -187,3 +187,17 @@ declare module "@vue/runtime-core" {
     SltAdminFormInput: typeof SltAdminFormInput;
   }
 ```
+
+## Releasing a new version
+
+To release a new version, first login with your npm account details:
+
+```
+npm login
+```
+
+Then set the new version number in `package.json` and run:
+
+```
+npm publish
+```
