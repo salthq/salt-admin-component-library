@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   stories: [
     "../stories/**/*.stories.mdx",
@@ -19,4 +21,11 @@ module.exports = {
     },
   ],
   framework: "@storybook/vue3",
+  webpackFinal: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname, "../src"),
+    };
+    return config;
+  },
 };
