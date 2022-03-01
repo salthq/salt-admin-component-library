@@ -42,6 +42,7 @@ watch(inputValue, () => {
 
 <template>
   <admin-form-item-wrapper
+    :error="error"
     :input-id="inputId"
     :label="label"
     :info="info"
@@ -68,12 +69,5 @@ watch(inputValue, () => {
         Loading...
       </span>
     </div>
-    <!-- Error -->
-    <span
-      v-if="error"
-      data-test="error"
-      class="block mt-1 text-sm text-red-600"
-      >{{ error }}</span
-    >
   </admin-form-item-wrapper>
 </template>

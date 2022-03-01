@@ -73,6 +73,14 @@ WithInfo.args = {
   type: "text",
 };
 
+export const WithError = Template.bind({});
+WithError.args = {
+  error: "Something went wrong",
+  inputId: "example_textarea",
+  label: "About",
+  type: "text",
+};
+
 export const WithCharacterLimit = (args) => ({
   components: { SltAdminFormTextArea },
   setup() {

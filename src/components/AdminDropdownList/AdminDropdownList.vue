@@ -7,8 +7,6 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, reactive, toRefs } from "vue";
 
-import IconRemove from "@/components/IconRemove/IconRemove.vue";
-
 // Composables
 import searchWithFuse from "@/composables/dropdown/searchWithFuse";
 
@@ -17,6 +15,7 @@ import { DropdownListItem } from "@/types";
 
 // Components
 import AdminButton from "../AdminButton/AdminButton.vue";
+import IconRemove from "@/components/IconRemove/IconRemove.vue";
 
 interface AdminDropdownListState {
   inputActive: boolean;

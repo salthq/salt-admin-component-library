@@ -73,7 +73,12 @@ const emitInput = (event: DropdownListItem | null) => {
 </script>
 
 <template>
-  <admin-form-item-wrapper :inputId="inputId" :label="label" :info="info">
+  <admin-form-item-wrapper
+    :error="error"
+    :inputId="inputId"
+    :label="label"
+    :info="info"
+  >
     <admin-dropdown-list
       :existing-selection="existingSelection ?? undefined"
       item-identifier="value"
@@ -85,13 +90,5 @@ const emitInput = (event: DropdownListItem | null) => {
       :value="inputValue"
       :error="error"
     />
-
-    <!-- Error -->
-    <span
-      v-if="error"
-      data-test="error"
-      class="block mt-1 text-sm text-red-600"
-      >{{ error }}</span
-    >
   </admin-form-item-wrapper>
 </template>

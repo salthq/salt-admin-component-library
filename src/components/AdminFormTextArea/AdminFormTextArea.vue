@@ -15,6 +15,7 @@ const emit = defineEmits<{
 
 const props = withDefaults(
   defineProps<{
+    error?: string;
     inputId: string;
     label: string;
     info?: string;
@@ -43,6 +44,7 @@ onMounted(() => {
 
 <template>
   <admin-form-item-wrapper
+    :error="error"
     :input-id="inputId"
     :label="label"
     :info="info"
@@ -59,6 +61,7 @@ onMounted(() => {
         @input="emitInput"
         :rows="rows"
         class="block w-full shadow-sm appearance-none border rounded py-2 px-3 text-gray-700 sm:text-sm sm:leading-5 transition duration-150 ease-in-out"
+        :class="{ 'border-red-500': error }"
       ></textarea>
       <span
         v-if="inputValue && maxLength"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  error?: string;
   inputId: string;
   label?: string;
   info?: string;
@@ -23,6 +24,14 @@ defineProps<{
     </p>
     <div class="sm:col-span-2">
       <slot> </slot>
+
+      <!-- Error -->
+      <span
+        v-if="error"
+        data-test="error"
+        class="block mt-1 text-sm text-red-600"
+        >{{ error }}</span
+      >
     </div>
   </div>
 </template>
