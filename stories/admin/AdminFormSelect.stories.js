@@ -64,3 +64,21 @@ WithError.args = {
   label: "Select an attachment type",
   required: true,
 };
+
+export const WithButton = Template.bind({});
+WithButton.args = {
+  showButton: true,
+  inputId: "example_select",
+  options: [
+    {
+      id: "document",
+      name: "Document",
+    },
+    {
+      id: "file",
+      name: "File",
+    },
+  ],
+  label: "Select an attachment type",
+  required: true,
+};

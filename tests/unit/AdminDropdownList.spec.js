@@ -1,4 +1,4 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount, shallowMount } from "@vue/test-utils";
 import { assert } from "chai";
 
 import { nextTick } from "vue";
@@ -81,5 +81,18 @@ describe("AdminDropdownList.vue", () => {
     await nextTick();
 
     assert.isNull(wrapper.vm.selectedItem);
+  });
+
+  it("can show a button which allows you to control when the item is selected", () => {
+    const wrapper = mount(AdminDropdownList, {
+      props: {
+        itemList: itemList,
+        showButton: true,
+      },
+    });
+
+    const button = wrapper.find("[data-test='select-button']");
+
+    assert.isTrue(button.exists());
   });
 });

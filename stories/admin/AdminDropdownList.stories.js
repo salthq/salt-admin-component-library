@@ -44,3 +44,34 @@ Default.args = {
     },
   ],
 };
+
+export const WithButton = Template.bind({});
+WithButton.args = {
+  itemList: [
+    {
+      id: "document",
+      name: "Document",
+    },
+    {
+      id: "file",
+      name: "File",
+    },
+    {
+      id: "link",
+      name: "Link",
+    },
+    {
+      id: "presentation",
+      name: "Presentation",
+    },
+    {
+      id: "spreadsheet",
+      name: "Spreadsheet",
+    },
+    {
+      id: "folder",
+      name: "Folder",
+    },
+  ],
+  showButton: true,
+};
