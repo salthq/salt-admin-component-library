@@ -18,9 +18,7 @@ const searchString = useDebouncedRef("", 1000, false);
 
 const emitSearch = () => {
   let query = searchString.value[0];
-  if (query) {
-    emit("search", query);
-  }
+  emit("search", query);
 };
 
 watch(searchString, () => {
