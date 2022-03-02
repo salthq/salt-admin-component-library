@@ -18,7 +18,7 @@ const props = withDefaults(
     fill: "currentColor",
     size: 16,
     strokeWidth: 0,
-    viewBox: "0 0 32 32",
+    viewBox: "0 0 20 20",
   }
 );
 </script>
