@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, reactive, toRefs } from "vue";
+import { computed, reactive, toRefs, watch } from "vue";
 
 import state from "../../state/adminTableState";
 import { TableOptions, TablePagination } from "../../types";
@@ -40,7 +40,7 @@ const data = reactive({
 });
 
 const { tablePerPageOption } = toRefs(state);
-const { pageInput } = toRefs(data);
+const { pageInput, perPage } = toRefs(data);
 
 const filteredRowOptions = computed(() => {
   // We don't want the user to pick more options per page than there are items in total
@@ -168,6 +168,10 @@ const userAlert = () => {
     );
   }
 };
+
+watch(perPage, () => {
+  adjustRowsPerPage();
+});
 </script>
 
 <template>
@@ -185,7 +189,7 @@ const userAlert = () => {
           class="bg-white"
           name="Rows per page"
           id="rows_per_page"
-          @change="adjustRowsPerPage"
+          v-model="data.perPage"
         >
           <option
             :key="option"
