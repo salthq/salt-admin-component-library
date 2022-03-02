@@ -15,7 +15,7 @@ import { DropdownListItem } from "@/types";
 
 // Components
 import AdminButton from "../AdminButton/AdminButton.vue";
-import IconRemove from "@/components/IconRemove/IconRemove.vue";
+import IconRemove from "../IconRemove/IconRemove.vue";
 
 interface AdminDropdownListState {
   inputActive: boolean;
