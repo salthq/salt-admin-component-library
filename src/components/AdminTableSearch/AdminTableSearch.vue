@@ -7,25 +7,21 @@ export default {
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 
+// Composables
+import useDebouncedRef from "../../composables/useDebouncedRef";
+
 const emit = defineEmits<{
   (event: "search", value: string): void;
 }>();
 
-const isTyping = ref(false);
-const searchString = ref("");
-
-watch(searchString, () => {
-  isTyping.value = false;
-});
+const searchString = useDebouncedRef("", 1000, false);
 
 const emitSearch = () => {
   emit("search", searchString.value);
 };
 
-watch(isTyping, () => {
-  if (isTyping.value === false) {
-    emitSearch();
-  }
+watch(searchString, () => {
+  emitSearch();
 });
 
 onMounted(() => {
@@ -39,7 +35,6 @@ onMounted(() => {
     <input
       type="search"
       class="form-control h-10 px-5 w-64 rounded-md shadow"
-      @input="isTyping = true"
       v-model="searchString"
       placeholder="Search"
     />

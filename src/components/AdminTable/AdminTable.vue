@@ -13,6 +13,7 @@ import { Columns, TableOptions, TableData, TablePagination } from "../../types";
 
 import AdminTableHeader from "../AdminTableHeader/AdminTableHeader.vue";
 import AdminTablePagination from "../AdminTablePagination/AdminTablePagination.vue";
+import AdminTableSearch from "../AdminTableSearch/AdminTableSearch.vue";
 import IconLoading from "../../components/IconLoading/IconLoading.vue";
 
 const emit = defineEmits<{
@@ -125,7 +126,14 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col">
-    <slot name="customActions"></slot>
+    <div class="flex items-end justify-end">
+      <slot name="customActions"> </slot>
+
+      <admin-table-search
+        v-if="hasSearch"
+        @search="searchOrSort($event, null)"
+      />
+    </div>
 
     <div
       class="-my-2 pt-2 pb-24 lg:pb-8 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
@@ -153,7 +161,9 @@ onMounted(() => {
                 <admin-table-header
                   v-for="column in columns"
                   :key="column.label"
-                  @click="column.sort ? searchOrSort(null, column.sort) : ''"
+                  @clicked="
+                    column.sort ? searchOrSort(null, column.sort) : null
+                  "
                   :label="column.label"
                   :sort="column.sort ?? undefined"
                 />
