@@ -6,10 +6,9 @@ export default {
 
 <script setup lang="ts">
 import { computed, reactive, toRefs } from "vue";
-// import { Inertia } from "@inertiajs/inertia";
 
 import state from "../../state/adminTableState";
-import { TablePagination } from "../../types";
+import { TableOptions, TablePagination } from "../../types";
 
 import AppInertiaLink from "../AppInertiaLink.vue";
 import IconArrowNext from "../../components/IconArrowNext/IconArrowNext.vue";
@@ -18,6 +17,10 @@ import IconArrowPrev from "../../components/IconArrowPrev/IconArrowPrev.vue";
 interface PageNumber {
   [key: number]: number | string;
 }
+
+const emit = defineEmits<{
+  (event: "change-pagination", form: TableOptions): void;
+}>();
 
 const props = withDefaults(
   defineProps<{
@@ -123,15 +126,26 @@ const adjustRowsPerPage = () => {
     state.tablePerPageOption = data.perPage;
 
     const params = new URLSearchParams(location.search);
-    /**
-     * We need to clear the page query param, otherwise the table view will sometmies break if the user changes rows per page while viewing a
-     * page other than 1
-     */
 
-    params.delete("page");
-    params.set("perPage", `${data.perPage}`);
+    let form: TableOptions = {
+      query: state.activeQuery,
+      column: state.activeSortColumn,
+      direction: state.activeSortState,
+      perPage: state.tablePerPageOption,
+    };
 
-    // Inertia.visit(`${location.pathname}?${params}`);
+    for (const [key, value] of params) {
+      if (
+        key !== "query" &&
+        key !== "column" &&
+        key !== "direction" &&
+        key !== "perPage"
+      ) {
+        form.key = value;
+      }
+    }
+
+    emit("change-pagination", form);
   }
 };
 
@@ -144,15 +158,7 @@ const pageUrl = (page: number) => {
 };
 
 const validatePageInput = () => {
-  if (
-    data.pageInput > props.pagination.last_page ||
-    typeof data.pageInput !== "number"
-  ) {
-    data.inputIsValid = false;
-    return "#";
-  } else {
-    return `${props.pagination.path}?page=${data.pageInput}`;
-  }
+  return `${props.pagination.path}?page=${data.pageInput}`;
 };
 
 const userAlert = () => {
@@ -249,7 +255,7 @@ const userAlert = () => {
             aria-label="Next"
             title="Previous"
           >
-            <icon-arrow-prev fill="grey-darkest" />
+            <icon-arrow-prev :size="18" fill="grey-darkest" />
           </app-inertia-link>
           <!-- Page number buttons -->
           <app-inertia-link
@@ -285,7 +291,7 @@ const userAlert = () => {
             aria-label="Next"
             title="Next"
           >
-            <icon-arrow-next fill="grey-darkest" />
+            <icon-arrow-next :size="18" fill="grey-darkest" />
           </app-inertia-link>
 
           <!-- User page input -->
@@ -302,12 +308,10 @@ const userAlert = () => {
             />
             <app-inertia-link
               preserve-scroll
-              :href="validatePageInput()"
+              :href="`${pagination.path}?page=${pageInput}`"
               tag="button"
               class="shadow-sm relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm leading-5 font-medium transition ease-in-out duration-150"
-              aria-label="$t('nav.pagination.next')"
-              title="$t('nav.pagination.next')"
-              v-on:click="userAlert()"
+              aria-label="Go"
             >
               Go
             </app-inertia-link>

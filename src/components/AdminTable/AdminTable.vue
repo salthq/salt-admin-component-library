@@ -9,21 +9,14 @@ import { computed, onMounted, reactive, toRefs } from "vue";
 
 import state from "../../state/adminTableState";
 
-import { Columns, TableData, TablePagination } from "../../types";
+import { Columns, TableOptions, TableData, TablePagination } from "../../types";
 
 import AdminTableHeader from "../AdminTableHeader/AdminTableHeader.vue";
 import AdminTablePagination from "../AdminTablePagination/AdminTablePagination.vue";
 import IconLoading from "../../components/IconLoading/IconLoading.vue";
 
-interface SearchForm {
-  query: string;
-  column: string;
-  direction: string;
-  [key: string]: string | number;
-}
-
 const emit = defineEmits<{
-  (event: "search", form: SearchForm): void;
+  (event: "change-table-state", form: TableOptions): void;
 }>();
 
 const props = withDefaults(
@@ -82,15 +75,12 @@ const searchOrSort = (query: string | null, sort: string | null) => {
 
   const params = new URLSearchParams(location.search);
 
-  let form: SearchForm = {
+  let form: TableOptions = {
     query: query,
     column: data.currentSort,
     direction: data.currentSortDir,
+    perPage: props.tablePagination?.per_page ?? 0,
   };
-
-  if (props.tablePagination) {
-    form.perPage = props.tablePagination.per_page;
-  }
 
   for (const [key, value] of params) {
     if (
@@ -103,7 +93,7 @@ const searchOrSort = (query: string | null, sort: string | null) => {
     }
   }
 
-  emit("search", form);
+  emit("change-table-state", form);
 };
 
 const toggleSelectAll = () => {
@@ -185,6 +175,7 @@ onMounted(() => {
         <admin-table-pagination
           v-if="hasPagination && tablePagination?.total"
           :pagination="tablePagination"
+          @change-pagination="emit('change-table-state', $event)"
         />
       </div>
     </div>

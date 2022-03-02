@@ -23,6 +23,14 @@ export interface FileUploadState {
   file: File | null;
   fileInput: HTMLInputElement | null;
 }
+
+export interface TableOptions {
+  query: string;
+  column: string;
+  direction: string;
+  perPage: string | number;
+  [key: string]: string | number;
+}
 export interface TableDataItem {
   [key: string]: any;
 }
