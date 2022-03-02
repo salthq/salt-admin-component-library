@@ -77,11 +77,13 @@ const searchOrSort = (query: string | null, sort: string | null) => {
   const params = new URLSearchParams(location.search);
 
   let form: TableOptions = {
-    query: query,
+    query: state.activeQuery,
     column: data.currentSort,
     direction: data.currentSortDir,
     perPage: props.tablePagination?.per_page ?? 0,
   };
+
+  console.log(form);
 
   for (const [key, value] of params) {
     if (

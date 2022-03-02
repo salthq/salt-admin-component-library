@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 
 // Composables
 import useDebouncedRef from "../../composables/useDebouncedRef";
@@ -17,7 +17,10 @@ const emit = defineEmits<{
 const searchString = useDebouncedRef("", 1000, false);
 
 const emitSearch = () => {
-  emit("search", searchString.value);
+  let query = searchString.value[0];
+  if (query) {
+    emit("search", query);
+  }
 };
 
 watch(searchString, () => {
