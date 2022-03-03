@@ -5,6 +5,7 @@ import SltAdminButton from "@pango-studio/salt-admin-component-library/src/compo
 import SltAdminCardWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminCardWrapper/AdminCardWrapper.vue";
 import SltAdminCopyBadge from "@pango-studio/salt-admin-component-library/src/components/AdminCopyBadge/AdminCopyBadge.vue";
 import SltAdminDropdownList from "@pango-studio/salt-admin-component-library/src/components/AdminDropdownList/AdminDropdownList.vue";
+import SltAdminFormButtonGroup from "@pango-studio/salt-admin-component-library/src/components/AdminFormButtonGroup/AdminFormButtonGroup.vue";
 import SltAdminFormHeading from "@pango-studio/salt-admin-component-library/src/components/AdminFormHeading/AdminFormHeading.vue";
 import SltAdminFormInput from "@pango-studio/salt-admin-component-library/src/components/AdminFormInput/AdminFormInput.vue";
 import SltAdminFormItemWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminFormItemWrapper/AdminFormItemWrapper.vue";
@@ -12,7 +13,6 @@ import SltAdminFormSelect from "@pango-studio/salt-admin-component-library/src/c
 import SltAdminFormTextArea from "@pango-studio/salt-admin-component-library/src/components/AdminFormTextArea/AdminFormTextArea.vue";
 import SltAdminFormToggle from "@pango-studio/salt-admin-component-library/src/components/AdminFormToggle/AdminFormToggle.vue";
 import SltAdminFormUpload from "@pango-studio/salt-admin-component-library/src/components/AdminFormUpload/AdminFormUpload.vue";
-
 import SltAdminFormWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminFormWrapper/AdminFormWrapper.vue";
 import SltAdminLinkButton from "@pango-studio/salt-admin-component-library/src/components/AdminLinkButton/AdminLinkButton.vue";
 import SltAdminRemoveBadge from "@pango-studio/salt-admin-component-library/src/components/AdminRemoveBadge/AdminRemoveBadge.vue";
@@ -78,6 +78,7 @@ declare module "@vue/runtime-core" {
     SltAdminCardWrapper: typeof SltAdminCardWrapper;
     SltAdminCopyBadge: typeof SltAdminCopyBadge;
     SltAdminDropdownlist: typeof SltAdminDropdownList;
+    SltAdminFormButtonGroup: typeof SltAdminFormButtonGroup;
     SltAdminFormHeading: typeof SltAdminFormHeading;
     SltAdminFormInput: typeof SltAdminFormInput;
     SltAdminFormItemWrapper: typeof SltAdminFormItemWrapper;

@@ -24,6 +24,11 @@ export interface FileUploadState {
   fileInput: HTMLInputElement | null;
 }
 
+export interface FormButtonGroupItem {
+  label: string;
+  value: string;
+}
+
 export interface TableOptions {
   query: string;
   column: string;
