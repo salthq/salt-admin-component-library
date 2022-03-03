@@ -83,8 +83,6 @@ const searchOrSort = (query: string | null, sort: string | null) => {
     perPage: props.tablePagination?.per_page ?? 0,
   };
 
-  console.log(form);
-
   for (const [key, value] of params) {
     if (
       key !== "query" &&

@@ -14,11 +14,14 @@ const emit = defineEmits<{
   (event: "search", value: string): void;
 }>();
 
-const searchString = useDebouncedRef("", 1000, false);
+const searchString = useDebouncedRef(null, 1000, false);
 
 const emitSearch = () => {
   let query = searchString.value[0];
-  emit("search", query);
+
+  if (query !== null) {
+    emit("search", query);
+  }
 };
 
 watch(searchString, () => {
@@ -27,7 +30,7 @@ watch(searchString, () => {
 
 onMounted(() => {
   const params = new URLSearchParams(location.search);
-  searchString.value = params.get("query") ?? "";
+  searchString.value = params.get("query") ?? null;
 });
 </script>
 
