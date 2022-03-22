@@ -49,4 +49,18 @@ describe("AdminTabButton.vue", () => {
     assert.exists(wrapper.emitted().selected);
     assert.equal(wrapper.emitted().selected[0].shift(), tab);
   });
+
+  it("sets tab to an empty string if no tab is specified", async () => {
+    const wrapper = shallowMount(AdminTabButton, {
+      props: { label, active: false },
+    });
+
+    const tabButton = wrapper.find("button");
+    tabButton.trigger("click");
+
+    await nextTick();
+
+    assert.exists(wrapper.emitted().selected);
+    assert.equal(wrapper.emitted().selected[0].shift(), "");
+  });
 });

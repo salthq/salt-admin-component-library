@@ -5,11 +5,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-const props = defineProps<{
-  active?: boolean;
-  label: string;
-  tab: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    active?: boolean;
+    label: string;
+    tab?: string;
+  }>(),
+  { tab: "" }
+);
 
 const emit = defineEmits<{
   (event: "selected", value: string): void;
