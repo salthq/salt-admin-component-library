@@ -6,6 +6,7 @@ import SltAdminCardWrapper from "@pango-studio/salt-admin-component-library/src/
 import SltAdminCopyBadge from "@pango-studio/salt-admin-component-library/src/components/AdminCopyBadge/AdminCopyBadge.vue";
 import SltAdminDropdownList from "@pango-studio/salt-admin-component-library/src/components/AdminDropdownList/AdminDropdownList.vue";
 import SltAdminFormButtonGroup from "@pango-studio/salt-admin-component-library/src/components/AdminFormButtonGroup/AdminFormButtonGroup.vue";
+import SltAdminFormDatePicker from "@pango-studio/salt-admin-component-library/src/components/AdminFormDatePicker/AdminFormDatePicker.vue";
 import SltAdminFormHeading from "@pango-studio/salt-admin-component-library/src/components/AdminFormHeading/AdminFormHeading.vue";
 import SltAdminFormInput from "@pango-studio/salt-admin-component-library/src/components/AdminFormInput/AdminFormInput.vue";
 import SltAdminFormItemWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminFormItemWrapper/AdminFormItemWrapper.vue";
@@ -53,6 +54,7 @@ import SltIconIncorrect from "@pango-studio/salt-admin-component-library/src/com
 import SltIconInfo from "@pango-studio/salt-admin-component-library/src/components/IconInfo/IconInfo.vue";
 import SltIconLink from "@pango-studio/salt-admin-component-library/src/components/IconLink/IconLink.vue";
 import SltIconList from "@pango-studio/salt-admin-component-library/src/components/IconList/IconList.vue";
+import SltIconLoading from "@pango-studio/salt-admin-component-library/src/components/IconLoading/IconLoading.vue";
 import SltIconMenu from "@pango-studio/salt-admin-component-library/src/components/IconMenu/IconMenu.vue";
 import SltIconNotification from "@pango-studio/salt-admin-component-library/src/components/IconNotification/IconNotification.vue";
 import SltIconPlus from "@pango-studio/salt-admin-component-library/src/components/IconPlus/IconPlus.vue";
@@ -79,6 +81,7 @@ declare module "@vue/runtime-core" {
     SltAdminCopyBadge: typeof SltAdminCopyBadge;
     SltAdminDropdownlist: typeof SltAdminDropdownList;
     SltAdminFormButtonGroup: typeof SltAdminFormButtonGroup;
+    SltAdminFormDatePicker: typeof SltAdminFormDatePicker;
     SltAdminFormHeading: typeof SltAdminFormHeading;
     SltAdminFormInput: typeof SltAdminFormInput;
     SltAdminFormItemWrapper: typeof SltAdminFormItemWrapper;
@@ -126,6 +129,7 @@ declare module "@vue/runtime-core" {
     SltIconInfo: typeof SltIconInfo;
     SltIconLink: typeof SltIconLink;
     SltIconList: typeof SltIconList;
+    SltIconLoading: typeof SltIconLoading;
     SltIconMenu: typeof SltIconMenu;
     SltIconNotification: typeof SltIconNotification;
     SltIconPlus: typeof SltIconPlus;

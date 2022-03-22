@@ -6,6 +6,7 @@ import AdminCardWrapper from "./AdminCardWrapper";
 import AdminCopyBadge from "./AdminCopyBadge";
 import AdminDropdownList from "./AdminDropdownList";
 import AdminFormButtonGroup from "./AdminFormButtonGroup";
+import AdminFormDatePicker from "./AdminFormDatePicker";
 import AdminFormHeading from "./AdminFormHeading";
 import AdminFormInput from "./AdminFormInput";
 import AdminFormItemWrapper from "./AdminFormItemWrapper";
@@ -35,6 +36,7 @@ export {
   AdminCopyBadge,
   AdminDropdownList,
   AdminFormButtonGroup,
+  AdminFormDatePicker,
   AdminFormHeading,
   AdminFormInput,
   AdminFormItemWrapper,
