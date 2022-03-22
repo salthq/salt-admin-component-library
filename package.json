@@ -1,6 +1,6 @@
 {
   "name": "@pango-studio/salt-admin-component-library",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -19,7 +19,7 @@
   "dependencies": {
     "fuse.js": "^6.5.3",
     "sinon": "^13.0.1",
-    "v-calendar": "^3.0.0-alpha.8"
+    "v-calendar": "3.0.0-alpha.8"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

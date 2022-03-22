@@ -64,7 +64,6 @@ import { ref, watch } from "vue";
 import AdminFormItemWrapper from "../AdminFormItemWrapper/AdminFormItemWrapper.vue";
 
 // V-calendar
-import "v-calendar/dist/style.css";
 import { DatePicker } from "v-calendar";
 
 const emit = defineEmits<{
