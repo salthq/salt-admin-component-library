@@ -24,8 +24,8 @@ const props = withDefaults(
 </script>
 
 <template>
-  <icon-wrapper v-bind="props">
-    <g>
+  <div class="flex space-x-2">
+    <icon-wrapper v-bind="props">
       <circle cx="15" cy="15" r="15">
         <animate
           attributeName="r"
@@ -48,7 +48,10 @@ const props = withDefaults(
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+    </icon-wrapper>
+
+    <icon-wrapper v-bind="props">
+      <circle cx="15" cy="15" r="15" fill-opacity="0.3">
         <animate
           attributeName="r"
           from="9"
@@ -70,7 +73,10 @@ const props = withDefaults(
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="105" cy="15" r="15">
+    </icon-wrapper>
+
+    <icon-wrapper v-bind="props">
+      <circle cx="15" cy="15" r="15">
         <animate
           attributeName="r"
           from="15"
@@ -92,6 +98,6 @@ const props = withDefaults(
           repeatCount="indefinite"
         />
       </circle>
-    </g>
-  </icon-wrapper>
+    </icon-wrapper>
+  </div>
 </template>
