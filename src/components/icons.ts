@@ -26,6 +26,7 @@ import IconIncorrect from "./IconIncorrect";
 import IconInfo from "./IconInfo";
 import IconLink from "./IconLink";
 import IconList from "./IconList";
+import IconLoading from "./IconLoading";
 import IconMenu from "./IconMenu";
 import IconNotification from "./IconNotification";
 import IconPlus from "./IconPlus";
@@ -58,6 +59,7 @@ export {
   IconPlus,
   IconNotification,
   IconMenu,
+  IconLoading,
   IconList,
   IconLink,
   IconArchive,
