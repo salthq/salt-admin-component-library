@@ -15,7 +15,7 @@ type buttonType = "submit" | "button" | "reset";
 type variationType = "primary" | "secondary" | "danger" | "white";
 
 const emit = defineEmits<{
-  (event: "click"): void;
+  (event: "clicked"): void;
 }>();
 
 const props = withDefaults(
@@ -60,7 +60,7 @@ const variationClasses = computed(() => ({
 }));
 
 const onClick = () => {
-  emit("click");
+  emit("clicked");
 };
 </script>
 
