@@ -2,7 +2,7 @@ import SltAdminStepWrapper from "../../src/components/AdminStepWrapper/AdminStep
 import SltAdminStepItem from "../../src/components/AdminStepItem/AdminStepItem.vue";
 
 export default {
-  title: "Admin/Steps",
+  title: "Admin/Steps/Wrapper",
   component: SltAdminStepWrapper,
 };
 

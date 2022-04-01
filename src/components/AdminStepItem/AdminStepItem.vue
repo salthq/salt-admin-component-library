@@ -39,7 +39,7 @@ const stepClasses = computed(() => {
 </script>
 
 <template>
-  <li class="md:flex-1">
+  <li class="list-none md:flex-1">
     <app-inertia-link
       :href="url ?? ''"
       class="block pl-4 py-2 border-t-4 md:pl-0 md:pt-4 md:pb-0"
