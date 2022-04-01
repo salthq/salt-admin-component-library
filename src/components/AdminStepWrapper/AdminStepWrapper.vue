@@ -6,7 +6,9 @@ export default {
 
 <template>
   <nav class="w-full">
-    <ul class="space-y-4 md:flex md:space-y-0 md:space-x-8"></ul>
+    <ul class="space-y-4 md:flex md:space-y-0 md:space-x-8">
+      <slot></slot>
+    </ul>
   </nav>
 </template>
 
