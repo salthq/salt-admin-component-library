@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/**/*.{html,vue,js,ts}"],
+  content: ["./src/**/*.{html,vue,js,ts}", "./stories/**/*.{html,vue,js,ts}"],
   theme: {
     fontSize: {
       xs: "0.75rem",
