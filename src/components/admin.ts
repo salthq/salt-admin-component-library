@@ -17,6 +17,7 @@ import AdminFormUpload from "./AdminFormUpload";
 import AdminFormWrapper from "./AdminFormWrapper";
 import AdminLinkButton from "./AdminLinkButton";
 import AdminRemoveBadge from "./AdminRemoveBadge";
+import AdminStepWrapper from "./AdminStepWrapper";
 import AdminTabButton from "./AdminTabButton";
 import AdminTabContentWrapper from "./AdminTabContentWrapper";
 import AdminTabGroup from "./AdminTabGroup";
@@ -41,6 +42,7 @@ export {
   AdminFormInput,
   AdminFormItemWrapper,
   AdminFormSelect,
+  AdminStepWrapper,
   AdminFormTextArea,
   AdminFormToggle,
   AdminFormUpload,

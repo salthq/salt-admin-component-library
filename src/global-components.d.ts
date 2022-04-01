@@ -17,6 +17,7 @@ import SltAdminFormUpload from "@pango-studio/salt-admin-component-library/src/c
 import SltAdminFormWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminFormWrapper/AdminFormWrapper.vue";
 import SltAdminLinkButton from "@pango-studio/salt-admin-component-library/src/components/AdminLinkButton/AdminLinkButton.vue";
 import SltAdminRemoveBadge from "@pango-studio/salt-admin-component-library/src/components/AdminRemoveBadge/AdminRemoveBadge.vue";
+import SltAdminStepWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminStepWrapper/AdminStepWrapper";
 import SltAdminTabButton from "@pango-studio/salt-admin-component-library/src/components/AdminTabButton/AdminTabButton.vue";
 import SltAdminTabContentWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminTabContentWrapper/AdminTabContentWrapper.vue";
 import SltAdminTabGroup from "@pango-studio/salt-admin-component-library/src/components/AdminTabGroup/AdminTabGroup.vue";
@@ -92,6 +93,7 @@ declare module "@vue/runtime-core" {
     SltAdminFormWrapper: typeof SltAdminFormWrapper;
     SltAdminLinkButton: typeof SltAdminLinkButton;
     SltAdminRemoveBadge: typeof SltAdminRemoveBadge;
+    SltAdminStepWrapper: typeof SltAdminStepWrapper;
     SltAdminTabButton: typeof SltAdminTabButton;
     SltAdminTabContentWrapper: typeof SltAdminTabContentWrapper;
     SltAdminTableHeader: typeof SltAdminTableHeader;
