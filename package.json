@@ -1,7 +1,7 @@
 {
   "name": "@pango-studio/salt-admin-component-library",
   "description": "A library of admin components written with Vue3, TypeScript and TailwindCSS",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
