@@ -16,3 +16,8 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
+
+Default.args = {
+  inputId: "form_upload",
+  label: "Upload your file",
+};
