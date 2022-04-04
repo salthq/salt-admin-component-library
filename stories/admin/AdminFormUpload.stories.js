@@ -12,7 +12,7 @@ const Template = (args) => ({
       args,
     };
   },
-  template: `<slt-admin-form-upload v-bind="args" />`,
+  template: `<div class="max-w-lg"><slt-admin-form-upload v-bind="args" /></div>`,
 });
 
 export const Default = Template.bind({});
