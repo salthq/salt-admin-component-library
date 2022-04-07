@@ -18,6 +18,7 @@ import SltAdminFormWrapper from "@pango-studio/salt-admin-component-library/src/
 import SltAdminLinkButton from "@pango-studio/salt-admin-component-library/src/components/AdminLinkButton/AdminLinkButton.vue";
 import SltAdminRemoveBadge from "@pango-studio/salt-admin-component-library/src/components/AdminRemoveBadge/AdminRemoveBadge.vue";
 import SltAdminProgressBar from "@pango-studio/salt-admin-component-library/src/components/AdminProgressBar/AdminProgressBar.vue";
+import SltAdminStatsCard from "@pango-studio/salt-admin-component-library/src/components/AdminStatsCard/AdminStatsCard.vue";
 import SltAdminStepItem from "@pango-studio/salt-admin-component-library/src/components/AdminStepItem/AdminStepItem.vue";
 import SltAdminStepWrapper from "@pango-studio/salt-admin-component-library/src/components/AdminStepWrapper/AdminStepWrapper.vue";
 import SltAdminTabButton from "@pango-studio/salt-admin-component-library/src/components/AdminTabButton/AdminTabButton.vue";
@@ -73,6 +74,7 @@ import SltIconTile from "@pango-studio/salt-admin-component-library/src/componen
 import SltIconTrash from "@pango-studio/salt-admin-component-library/src/components/IconTrash/IconTrash.vue";
 import SltIconUnarchive from "@pango-studio/salt-admin-component-library/src/components/IconUnarchive/IconUnarchive.vue";
 import SltIconUser from "@pango-studio/salt-admin-component-library/src/components/IconUser/IconUser.vue";
+import { SltAdminStatsCard } from "./components/AdminStatsCard";
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
@@ -96,6 +98,7 @@ declare module "@vue/runtime-core" {
     SltAdminLinkButton: typeof SltAdminLinkButton;
     SltAdminProgressBar: typeof SltAdminProgressBar;
     SltAdminRemoveBadge: typeof SltAdminRemoveBadge;
+    SltAdminStatsCard: typeof SltAdminStatsCard;
     SltAdminStepItem: typeof SltAdminStepItem;
     SltAdminStepWrapper: typeof SltAdminStepWrapper;
     SltAdminTabButton: typeof SltAdminTabButton;
