@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import SltIconLoading from "@/components/IconLoading/IconLoading.vue";
+import SltIconLoading from "../IconLoading/IconLoading.vue";
 
 defineProps<{
   label: string;
