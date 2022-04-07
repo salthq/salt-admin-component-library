@@ -35,12 +35,20 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   current: 0,
+  message: "Importing...",
   total: 100,
 };
 
 export const InProgress = Template.bind({});
 InProgress.args = {
   current: Math.floor(Math.random() * 99),
+  message: "Importing...",
+  total: 100,
+};
+
+export const Complete = Template.bind({});
+Complete.args = {
+  current: 100,
   message: "Importing...",
   total: 100,
 };
