@@ -53,7 +53,7 @@ const submit = (event: Event) => {
           :disabled="loading"
           type="submit"
           variation="primary"
-          :text="button"
+          :label="button"
         />
       </slot>
     </div>
